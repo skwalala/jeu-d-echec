@@ -1,0 +1,20 @@
+jeu va constituer notre main. 
+Y sera stocké :
+-une occurence de plateau
+-les coordonnées en x et en y de chaque roi
+la fonction main devra assurer : 
+l'affichage, puis à chaque fois qu'un joueur joue devra executer
+sedeplace() //retourne true si le déplacement a été éffectué
+checkEchec() => si true, echec => checkEchecEtMat() //map deplacement
+
+dans chaque classe éritant de pièce il y aura pour l'instant :
+un constructeur vide
+un constructeur ayant pour parametre(x,y,couleur)
+seDeplace(x,y, le plateau)
+checkDeplace() // ne pas mettre l'action de manger pour l'instant
+manger() //on s'occupera de cette fonction plus tard (peut être dans pièce ?)
+estManger() // à voir si utile. On s'occupera de cette fonction plus tard (peut être dans pièce ?)
+getAllDeplacement(Plateau) //renvoie le tableau completé avec toutes les casses ateignables en 1 coup ayant pour valeur 1
+
+
+plateau semble correct, juste penser à enlver prochainement affichePlateau et main (deplacement possible dans jeu
