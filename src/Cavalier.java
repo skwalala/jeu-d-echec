@@ -5,7 +5,7 @@ public class Cavalier extends Piece{
 		super(x,y,"C",couleur);
 	}
 
-	public boolean seDeplace(int dx, int dy){
+	public boolean seDeplace(Plateau p, int dx, int dy){
 		if (((super.getPosX()+2==dx)&&(super.getPosY()+1==dy))||
 			((super.getPosX()+2==dx)&&(super.getPosY()-1==dy))||
 			((super.getPosX()+1==dx)&&(super.getPosY()+2==dy))||
@@ -14,10 +14,12 @@ public class Cavalier extends Piece{
 			((super.getPosX()-1==dx)&&(super.getPosY()-2==dy))||
 			((super.getPosX()-2==dx)&&(super.getPosY()+1==dy))||
 			((super.getPosX()-2==dx)&&(super.getPosY()-1==dy))){
-			return true;
+			if (estOccuppeParPieceEquipe(dx,dy,super.getCouleur())==false){
+				mange(p[dx][dy]);
+				return true;
+			}
+			
 		}
 		return false;
 	}
-	//méthode mange --> comment faire ?
-
 }
