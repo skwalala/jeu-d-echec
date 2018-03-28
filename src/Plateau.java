@@ -65,4 +65,22 @@ class Plateau{
 
     p.affichePlateau();
   }
+
+  /**
+  * Renvoie true si il y à une pièce de la couleur "couleur" aux coordonées x,y
+  * @param x coordonée en x (int)
+  * @param y coordonée en y (int)
+  * @param couleur couleur à vérifier (string) (mettre this.couleur lors de l'appel de la fonction depuis une classe pièce)
+  * @return true si pièce de la même couleur à l'emplacement. sinon return false
+  */
+  
+  public boolean estOcuppeParPieceEquipe(int x, int y, String couleur){
+	if (this.plateau[x][y]!=null){
+		if (this.plateau[x][y].getCouleur().equals(couleur)){
+			return true;
+		}
+		return false;
+	}
+	return false;
+  }
 }
