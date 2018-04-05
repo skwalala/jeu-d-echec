@@ -16,23 +16,17 @@ class Fou extends Piece{
 	/*
 	 * reçoit une demande de déplacement et l'éxecute si celle-ci est possible
 	 */
-	public void seDeplace(int x, int y, Piece[][] p) {
+	public boolean seDeplace(int x, int y, Piece[][] p) {
 		if (checkDeplace(x,y,p)){
 			if (!(p[x][y]==null)) {
 				if (!(p[x][y].getCouleur()==super.getCouleur())) {
-					mange(x,y,p);
-				}
+					return true;
+				} else return false;
 			} else {
-				Piece temp;
-				temp=p[super.getPosX()][super.getPosY()];
-				p[super.getPosX()][super.getPosY()]=null;
-				super.setPosX(x);
-				super.setPosY(y);
-				p[x][y]=temp;
+				return true;
 			}
-		} else if (checkDeplace(x,y,p)==false){
-			
 		}
+		return false;
 	}
 
 	/*
@@ -79,15 +73,6 @@ class Fou extends Piece{
 			}
 		}
 		return true;
-	}
-
-	public void mange(int x, int y, Piece[][] p){
-		Piece temp;
-		temp=p[super.getPosX()][super.getPosY()];
-		p[super.getPosX()][super.getPosY()]=null;
-		super.setPosX(x);
-		super.setPosY(y);
-		p[x][y]=temp;
 	}
 }
 
