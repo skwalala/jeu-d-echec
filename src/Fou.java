@@ -74,5 +74,82 @@ class Fou extends Piece{
 		}
 		return true;
 	}
+
+	public int[][] getAllDeplacements(Piece[][] p){
+		int tabDeplacements[][] = new int[8][8];
+
+		int initX = super.getPosX();
+		int initY = super.getPosY();
+
+		boolean finDeDiagonale = false;
+
+		tabDeplacements[initX][initY] = 1;
+
+		int x=initX+1;
+		int y=initY+1;
+
+
+		while (x<8 && y<8 && finDeDiagonale==false) {
+			if (p[x][y]==null){
+				tabDeplacements[x][y] = 1;
+				x++;
+				y++;
+			} else {
+				if (!(p[x][y].getCouleur()==super.getCouleur())) {
+					tabDeplacements[x][y] = 1;
+				}
+				finDeDiagonale==true;
+			}	
+		}
+
+		finDeDiagonale=false;
+		x=initX+1;
+		y=initY-1;
+		while (x<8 && y>=0 && finDeDiagonale==false) {
+			if (p[x][y]==null){
+				tabDeplacements[x][y] = 1;
+				x++;
+				y--;
+			} else {
+				if (!(p[x][y].getCouleur()==super.getCouleur())) {
+					tabDeplacements[x][y] = 1;
+				}
+				finDeDiagonale==true;
+			}	
+		}
+
+		finDeDiagonale=false;
+		x=initX-1;
+		y=initY+1;
+		while (x>=0 && y<8 && finDeDiagonale==false) {
+			if (p[x][y]==null){
+				tabDeplacements[x][y] = 1;
+				x--;
+				y++;
+			} else {
+				if (!(p[x][y].getCouleur()==super.getCouleur())) {
+					tabDeplacements[x][y] = 1;
+				}
+				finDeDiagonale==true;
+			}	
+		}
+
+		finDeDiagonale=false;
+		x=initX-1;
+		y=initY-1;
+		while (x<8 && y<8 && finDeDiagonale==false) {
+			if (p[x][y]==null){
+				tabDeplacements[x][y] = 1;
+				x--;
+				y--;
+			} else {
+				if (!(p[x][y].getCouleur()==super.getCouleur())) {
+					tabDeplacements[x][y] = 1;
+				}
+				finDeDiagonale==true;
+			}	
+		}
+		return tabDeplacements;
+	}
 }
 
