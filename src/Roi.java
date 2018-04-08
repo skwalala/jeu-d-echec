@@ -13,7 +13,7 @@ public class Roi extends Piece
 
         public Roi(int x, int y, String Couleur)
         {
-          super(x, y, Couleur,"return ");
+          super(x, y, Couleur,"R");
         }
 
 
@@ -33,7 +33,7 @@ public class Roi extends Piece
       		diffX=Math.abs(diffX);
       		diffY=Math.abs(diffY);
 
-          
+
 
 
 
