@@ -83,6 +83,12 @@ class Fou extends Piece{
 
 		boolean finDeDiagonale = false;
 
+		for (int i = 0 ; i < 8 ; i++ ) {
+			for (int j = 0 ; j < 8 ; j++ ) {
+				tabDeplacements[i][j]=0;
+			}
+		}
+
 		tabDeplacements[initX][initY] = 1;
 
 		int x=initX+1;
@@ -98,7 +104,7 @@ class Fou extends Piece{
 				if (!(p[x][y].getCouleur()==super.getCouleur())) {
 					tabDeplacements[x][y] = 1;
 				}
-				finDeDiagonale==true;
+				finDeDiagonale=true;
 			}	
 		}
 
@@ -114,7 +120,7 @@ class Fou extends Piece{
 				if (!(p[x][y].getCouleur()==super.getCouleur())) {
 					tabDeplacements[x][y] = 1;
 				}
-				finDeDiagonale==true;
+				finDeDiagonale=true;
 			}	
 		}
 
@@ -130,7 +136,7 @@ class Fou extends Piece{
 				if (!(p[x][y].getCouleur()==super.getCouleur())) {
 					tabDeplacements[x][y] = 1;
 				}
-				finDeDiagonale==true;
+				finDeDiagonale=true;
 			}	
 		}
 
@@ -146,7 +152,7 @@ class Fou extends Piece{
 				if (!(p[x][y].getCouleur()==super.getCouleur())) {
 					tabDeplacements[x][y] = 1;
 				}
-				finDeDiagonale==true;
+				finDeDiagonale=true;
 			}	
 		}
 		return tabDeplacements;
