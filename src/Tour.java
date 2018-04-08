@@ -20,37 +20,72 @@ public class Tour extends Piece
 
         // methode validiter du mouvement
 
-        public boolean estValide(int DeplacementX, int DeplacementY, Piece[][] p)
+        public boolean estValide(int deplacementX, int deplacementY, Piece[][] p)
         {
 
           int x =super.getPosX();
       		int y =super.getPosY();
-      		int diffX = DeplacementX - x;
-      		int diffY = DeplacementY - y;
+          int a = x;
+          int b = y;
+      		int diffX = deplacementX - x;
+      		int diffY = deplacementY - y;
       		int b=initY;
       		diffX=Math.abs(diffX);
       		diffY=Math.abs(diffY);
 
-          if((y * DeplacementY == 0) && (x != DeplacementX))
+          if((y * deplacementY == 0) && (x < deplacementX))
           {
-              //if(checkDevant()== true)
-              //{
-                  return true;
-              //}
+                for(int i =0; i<diffX; i++)
+              {
+                  if(p[a-1][0]==null){
+                    a--;
+                  }
+                  else{
+                    return false;
+                  }
+              }
 
           }
 
-          if((x * DeplacementX == 0) && (y != DeplacementY))
+          if((y * deplacementY == 0) && (x > deplacementX))
           {
-              //if (checkDevant() == true)
-              //{
-                  return true;
-              //}
+                for(int i =0; i<diffX; i++)
+              {
+                  if(p[a+1][0]==null){
+                    a++;
+                  }
+                  else{
+                    return false;
+                  }
+              }
+
           }
-          else
+
+
+          if((x * deplacementX == 0) && (y < deplacementY))
           {
-            return false;
+            for(int i =0; i<diffX; i++)
+          {
+              if(p[0][b-1]==null){
+                b--;
+              }
+              else{
+                return false;
+              }
           }
+
+          if((x * deplacementX == 0) && (y > deplacementY))
+          {
+            for(int i =0; i<diffX; i++)
+          {
+              if(p[0][b+1]==null){
+                b++;
+              }
+              else{
+                return false;
+              }
+          }
+
 
         }
 
