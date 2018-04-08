@@ -107,21 +107,19 @@ public class Tour extends Piece
             return super.getPosY();
          }
 
-         public void seDeplace(int x, int y, Piece[] p)
-         {
-
-
-             if(estValide(x,y,p)=="true"){
-               Piece temp;
-               temp=p[super.getPosX()][super.getPosY()];
-               p[super.getPosX()][super.getPosY()]=null;
-               this.x=x;
-               this.y=y;
-               p[x][y]=temp;
-             } else if (checkDeplace(x,y,p)=="mange"){
-               this.mange(x,y,p);
-             }
-           }
+         public boolean seDeplace(int x, int y, Piece[][] p) {
+       		if (checkDeplace(x,y,p)){
+       			if (!(p[x][y]==null)) {
+       				if (!(p[x][y].getCouleur()==super.getCouleur())) {
+       					return true;
+       				} else return false;
+       			} else {
+       				return true;
+       			}
+       		} else if (checkDeplace(x,y,p)==false){
+       		}
+       		return false;
+       	}
 
 
 
