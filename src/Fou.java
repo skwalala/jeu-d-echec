@@ -1,6 +1,6 @@
 import java.lang.Math;
 class Fou extends Piece{
-	
+
 	/*
 	 * constructeur vide
 	 */
@@ -9,7 +9,7 @@ class Fou extends Piece{
 	/*
 	 * constructeur avec les positions en x, y et la couleur
 	 */
-	public Fou(int x, int y, String couleur){ 
+	public Fou(int x, int y, String couleur){
 		super(x,y,couleur,"F");
 	}
 
@@ -25,6 +25,11 @@ class Fou extends Piece{
 			} else {
 				return true;
 			}
+<<<<<<< Updated upstream
+=======
+		} else if (checkDeplace(x,y,p)==false){
+
+>>>>>>> Stashed changes
 		}
 		return false;
 	}
@@ -158,4 +163,3 @@ class Fou extends Piece{
 		return tabDeplacements;
 	}
 }
-
