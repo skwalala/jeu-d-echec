@@ -44,7 +44,7 @@ public class Dame extends Piece{
 		return !super.estOcuppeParPieceEquipe(dx,dy,super.getCouleur(),p);
 	}
 
-	public int[][] getAllDeplacement(){
+	public int[][] getAllDeplacement(Piece[][] p){
 		int grille[][] =new int[8][8];
 		for(int i=0; i<8; i++){
 			for (int j=0; j<8; j++){
