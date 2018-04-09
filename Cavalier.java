@@ -25,8 +25,8 @@ public class Cavalier extends Piece{
 
 	public int[][] getAllDeplacement(){
 		int[8][8] grille;
-		for(i=0; i<8; i++){
-			for (j=0; j<8; j++){
+		for(int i=0; i<8; i++){
+			for (int j=0; j<8; j++){
 				if (((super.getPosX()+2==i)&&(super.getPosY()+1==j))||
 					((super.getPosX()+2==i)&&(super.getPosY()-1==j))||
 					((super.getPosX()+1==i)&&(super.getPosY()+2==j))||
@@ -35,7 +35,9 @@ public class Cavalier extends Piece{
 					((super.getPosX()-1==i)&&(super.getPosY()-2==j))||
 					((super.getPosX()-2==i)&&(super.getPosY()+1==j))||
 					((super.getPosX()-2==i)&&(super.getPosY()-1==j))){
-					grille[i][j]=1;
+					if (estOccuppeParPieceEquipe(dx,dy,super.getCouleur())==false){
+						grille[i][j]=1;
+					}
 				}else{
 					grille[i][j]=0;
 				}
