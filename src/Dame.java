@@ -30,10 +30,18 @@ public class Dame extends Piece{
 			}else{ 
 				return !super.estOcuppeParPieceEquipe(dx,dy,super.getCouleur(),p);
 			}
-			if (i<dx)i++;
-			if (i>dx)i--;
-			if (j<dy)j++;
-			if (j>dy)j--;
+			if (i<dx){
+				i++;
+			}
+			if (i>dx){
+				i--;
+			}
+			if (j<dy){
+				j++;
+			}
+			if (j>dy){
+				j--;
+			}
 		}
 		return !super.estOcuppeParPieceEquipe(dx,dy,super.getCouleur(),p);
 	}
