@@ -43,7 +43,7 @@ public class Cavalier extends Piece{
 				}
 			}
 		}
-		grille[super.getPosX()][super.getPosY()]=1
+		grille[super.getPosX()][super.getPosY()]=1;
 		return grille;
 	}
 }
