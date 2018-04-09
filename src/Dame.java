@@ -26,17 +26,13 @@ public class Dame extends Piece{
 		int j=initY;
 		while(i!=dx && j!=dy){
 			if (p[i][j]!=null) return false;
-			else {
-				if (estOccuppeParPieceEquipe(i,j,super.getCouleur())==false) return true;
-				if (estOccuppeParPieceEquipe(i,j,super.getCouleur())==true) return false;
-			}
+			else return !estOccuppeParPieceEquipe(dx,dy,super.getCouleur());
 			if (i<dx)i++;
 			if (i>dx)i--;
 			if (j<dy)j++;
 			if (j>dy)j--;
 		}
-		if(estOccuppeParPieceEquipe(dx,dy,super.getCouleur())==false)
-			return true
+		return !estOccuppeParPieceEquipe(dx,dy,super.getCouleur());
 	}
 
 	public int[][] getAllDeplacement(){
