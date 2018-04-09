@@ -15,7 +15,6 @@ public class Cavalier extends Piece{
 			((super.getPosX()-2==dx)&&(super.getPosY()+1==dy))||
 			((super.getPosX()-2==dx)&&(super.getPosY()-1==dy))){
 			if (super.estOcuppeParPieceEquipe(dx,dy,super.getCouleur(),p)==false){
-				mange(p[dx][dy]);
 				return true;
 			}
 			
