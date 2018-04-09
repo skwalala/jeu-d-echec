@@ -5,7 +5,7 @@ public class Dame extends Piece{
 		super(x,y,"D",couleur);
 	}
 
-	public void seDeplace(Plateau p, int dx, int dy){
+	public boolean seDeplace(Piece[][] p, int dx, int dy){
 		if ((super.getPosX()==dx || super.getPosY()==dy) && checkDeplace(p,dx,dy)) //déplacement comme tour
 			return true;
 		else{
@@ -18,25 +18,25 @@ public class Dame extends Piece{
 		return false;
 	}
 
-	public boolean checkDeplace(Plateau p, int dx, int dy){
+	public boolean checkDeplace(Piece[][] p, int dx, int dy){
 		int initX=super.getPosX();
 		int initY=super.getPosY();
 
 		int i=initX;
-		int j=intY;
+		int j=initY;
 		while(i!=dx && j!=dy){
 			if (p[i][j]!=null) return false;
-			else return !super.estOccuppeParPieceEquipe(dx,dy,super.getCouleur());
+			else return !estOccuppeParPieceEquipe(dx,dy,super.getCouleur());
 			if (i<dx)i++;
 			if (i>dx)i--;
 			if (j<dy)j++;
 			if (j>dy)j--;
 		}
-		return !super.estOccuppeParPieceEquipe(dx,dy,super.getCouleur());
+		return !estOccuppeParPieceEquipe(dx,dy,super.getCouleur());
 	}
 
 	public int[][] getAllDeplacement(){
-		int grille=new int[8][8];
+		int grille[][] =new int[8][8];
 		for(int i=0; i<8; i++){
 			for (int j=0; j<8; j++){
 				if (i!=super.getPosX() && j!=super.getPosY())
@@ -45,6 +45,6 @@ public class Dame extends Piece{
 					grille[i][j]=1;
 			}
 		}
-
+		return grille;
 	}
 }
