@@ -28,14 +28,14 @@ public class Dame extends Piece{
 			if (p[i][j]!=null){
 			 return false;
 			}else{ 
-				return !super.estOcuppeParPieceEquipe(dx,dy,super.getCouleur());
+				return !super.estOcuppeParPieceEquipe(dx,dy,super.getCouleur(),p);
 			}
 			if (i<dx)i++;
 			if (i>dx)i--;
 			if (j<dy)j++;
 			if (j>dy)j--;
 		}
-		return !super.estOcuppeParPieceEquipe(dx,dy,super.getCouleur());
+		return !super.estOcuppeParPieceEquipe(dx,dy,super.getCouleur(),p);
 	}
 
 	public int[][] getAllDeplacement(){
