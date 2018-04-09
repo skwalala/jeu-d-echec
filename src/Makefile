@@ -8,12 +8,15 @@ CLASSES = \
 	Piece.java \
 	Plateau.java \
 	Fou.java \
-	Cavalier.java \
 	Pion.java \
-	Roi.java \
-	Tour.java
+	Tour.java \
+	Dame.java \
+	Cavalier.java \
+	Roi.java
 
 default: classes
+
+test: clean classes
 
 classes : $(CLASSES:.java=.class)
 
