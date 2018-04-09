@@ -25,11 +25,6 @@ class Fou extends Piece{
 			} else {
 				return true;
 			}
-<<<<<<< Updated upstream
-=======
-		} else if (checkDeplace(x,y,p)==false){
-
->>>>>>> Stashed changes
 		}
 		return false;
 	}
