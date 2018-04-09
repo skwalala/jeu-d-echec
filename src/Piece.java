@@ -47,6 +47,17 @@ class Piece{
     return this.nom = nom;
   }
 
+  public boolean estOcuppeParPieceEquipe(int x, int y, String couleur, Piece[][] plateau){
+	if (plateau[x][y]!=null){
+		if (plateau[x][y].getCouleur().equals(couleur)){
+			return true;
+		}
+		return false;
+	}
+	return false;
+  }
+
+
   /*public boolean checkDevant(Piece plateau[][], int deplacementX, int deplacementY){
     if (this.getPosX() != 1 && this.getPosX() !=8 && this.getPosY() != 1 && this.getPosY() !=8 ) {
       if (plateau[deplacementX][deplacementY] == null) {
