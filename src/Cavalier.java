@@ -5,7 +5,7 @@ public class Cavalier extends Piece{
 		super(x,y,"C",couleur);
 	}
 
-	public boolean seDeplace(Plateau p, int dx, int dy){
+	public boolean seDeplace(Piece[][] p, int dx, int dy){
 		if (((super.getPosX()+2==dx)&&(super.getPosY()+1==dy))||
 			((super.getPosX()+2==dx)&&(super.getPosY()-1==dy))||
 			((super.getPosX()+1==dx)&&(super.getPosY()+2==dy))||
@@ -23,7 +23,7 @@ public class Cavalier extends Piece{
 		return false;
 	}
 
-	public int[][] getAllDeplacement(){
+	public int[][] getAllDeplacement(Piece[][] p){
 		int grille[][] =new int[8][8];
 		for(int i=0; i<8; i++){
 			for (int j=0; j<8; j++){
@@ -35,7 +35,7 @@ public class Cavalier extends Piece{
 					((super.getPosX()-1==i)&&(super.getPosY()-2==j))||
 					((super.getPosX()-2==i)&&(super.getPosY()+1==j))||
 					((super.getPosX()-2==i)&&(super.getPosY()-1==j))){
-					if (super.estOcuppeParPieceEquipe(dx,dy,super.getCouleur(),p)==false){
+					if (super.estOcuppeParPieceEquipe(i,j,super.getCouleur(),p)==false){
 						grille[i][j]=1;
 					}
 				}else{
