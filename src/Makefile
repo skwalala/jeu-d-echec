@@ -7,7 +7,11 @@ CLASSES = \
 	Jeu.java \
 	Piece.java \
 	Plateau.java \
-	Fou.java
+	Fou.java \
+	Cavalier.java \
+	Pion.java \
+	Roi.java \
+	Tour.java
 
 default: classes
 
