@@ -27,8 +27,6 @@ public class Dame extends Piece{
 		while(i!=dx && j!=dy){
 			if (p[i][j]!=null){
 			 return false;
-			}else{ 
-				return !super.estOcuppeParPieceEquipe(dx,dy,super.getCouleur(),p);
 			}
 			if (i<dx){
 				i++;
