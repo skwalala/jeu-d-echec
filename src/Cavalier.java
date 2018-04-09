@@ -14,7 +14,7 @@ public class Cavalier extends Piece{
 			((super.getPosX()-1==dx)&&(super.getPosY()-2==dy))||
 			((super.getPosX()-2==dx)&&(super.getPosY()+1==dy))||
 			((super.getPosX()-2==dx)&&(super.getPosY()-1==dy))){
-			if (estOccuppeParPieceEquipe(dx,dy,super.getCouleur())==false){
+			if (super.estOcuppeParPieceEquipe(dx,dy,super.getCouleur())==false){
 				mange(p[dx][dy]);
 				return true;
 			}
@@ -35,7 +35,7 @@ public class Cavalier extends Piece{
 					((super.getPosX()-1==i)&&(super.getPosY()-2==j))||
 					((super.getPosX()-2==i)&&(super.getPosY()+1==j))||
 					((super.getPosX()-2==i)&&(super.getPosY()-1==j))){
-					if (estOccuppeParPieceEquipe(dx,dy,super.getCouleur())==false){
+					if (super.estOcuppeParPieceEquipe(dx,dy,super.getCouleur())==false){
 						grille[i][j]=1;
 					}
 				}else{
