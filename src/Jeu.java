@@ -2,29 +2,36 @@ import java.util.*;
 public class Jeu{
 	static final Scanner input = new Scanner(System.in);
 
-	public static String getCoordonnée(String pieceJoue, String camp){
+	public static String getCoordonnéePiece(String camp){
 		System.out.println(camp.concat(" c'est à vous, qu'elle pièce vous voulez déplacé ? "));
-		pieceJoue = input.nextLine();
-		return pieceJoue;
+		return input.nextLine();
 	}
 
-	public static int[] verif(char[] possA, char[] possB, String pieceJoue, String camp){
-	    int[] pieceConvertis = {};
+	public static String getCoordonnéeDeplacement(){
+	    System.out.println("Où voulez vous déplacer votre pièce ?");
+	    return input.nextLine();
+    }
+
+	public static void verif(char[] possA, char[] possB, String camp){
         boolean pieceCorrect = false;
+        boolean deplacementCorrect = false;
         int verification = 0;
+        char caractXPiece;
+        char caractYPiece;
+        int xPiece = 0;
+        int yPiece = 0;
         while(!pieceCorrect){
-            getCoordonnée(pieceJoue, camp);
-            char premierCaract = pieceJoue.charAt(0);
-            char secondCaract = pieceJoue.charAt(1);
+            String pieceJoue = getCoordonnéePiece(camp);
+            caractXPiece = pieceJoue.charAt(0);
+            caractYPiece = pieceJoue.charAt(1);
             for (int i = 0; i<possA.length; i++) {
                 for (int j = 0; j < possB.length; j++) {
-                    if ((pieceJoue.length() == 2) && (premierCaract == possA[i]) && (secondCaract == possB[j])) {
-                        verification = 1;
-                        int k = pieceConvertis.length;
-                        int convertisseur = Integer.parseInt(pieceJoue.substring(0,1));
-                        pieceConvertis[k+1] = convertisseur;
-                        convertisseur = Integer.parseInt(pieceJoue.substring(1,2));
-                        pieceConvertis[k+2] = convertisseur;
+                    if ((pieceJoue.length() == 2) && (caractXPiece == possA[i]) && (caractYPiece == possB[j])) {
+                        if (possA[i] == caractXPiece){
+                            xPiece = i;
+                            yPiece = caractYPiece;
+                            verification = 1;
+                        }
                     }
                 }
             }
@@ -34,7 +41,16 @@ public class Jeu{
                 System.out.println("Erreur : veuillez entrer une pièce se situant entre A1 et H8.");
             }
         }
-        return pieceConvertis;
+        while(!deplacementCorrect){
+         String deplacementJoue = getCoordonnéeDeplacement();
+         char caractNewXPiece = deplacementJoue.charAt(0);
+         char caractNewYPiece = deplacementJoue.charAt(1);
+         if(!Plateau[xPiece][yPiece].seDeplace(p, caractNewXPiece, caractNewYPiece)){
+             System.out.println("Erreur : veuillez choisir un autre emplacement.");
+         } else {
+             Plateau[xPiece][yPiece].seDeplace(p, caractNewXPiece, caractNewYPiece);
+         }
+        }
     }
 
     public void checkEchec(){
@@ -42,24 +58,17 @@ public class Jeu{
     }
 
     public static void main(String[] args) {
-    	//Plateau p = new Plateau();
-    	String pieceJoue = "";
+    	Plateau p = new Plateau();
     	String camp = "";
     	boolean partieFinie = false;
     	char[] possA = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
     	char[] possB = {'1', '2', '3', '4', '5', '6', '7', '8'};
     	while (!partieFinie) {
-    		//p.affichePlateau();
+    		p.affichePlateau();
 			camp = "Blanc";
-    		verif(possA, possB, pieceJoue, camp);
+    		verif(possA, possB, camp);
 			camp = "Noir";
-			verif(possA, possB, pieceJoue, camp);
+			verif(possA, possB, camp);
     	}
     }
-
-	/**
-	 *
-	 *  check echec => verifier si une des pièces addverses peut manger le roi
-	 *
-	 */
 }
