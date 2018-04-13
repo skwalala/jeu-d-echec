@@ -47,6 +47,8 @@ class Piece{
     return this.nom = nom;
   }
 
+  public boolean seDeplace(Piece[][] p, int dx, int dy){return false;} //temporaire
+
   public boolean estOcuppeParPieceEquipe(int x, int y, String couleur, Piece[][] plateau){
 	if (plateau[x][y]!=null){
 		if (plateau[x][y].getCouleur().equals(couleur)){
