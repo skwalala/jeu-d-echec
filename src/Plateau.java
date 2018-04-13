@@ -60,12 +60,6 @@ class Plateau{
     }
   }
 
-  public static void main(String[] args) {
-    Plateau p = new Plateau();
-
-    p.affichePlateau();
-  }
-
   /**
   * Renvoie true si il y à une pièce de la couleur "couleur" aux coordonées x,y
   * @param x coordonée en x (int)
@@ -82,5 +76,9 @@ class Plateau{
 		return false;
 	}
 	return false;
+  }
+
+  public Piece[][] getPlateau(){
+	return this.plateau;
   }
 }

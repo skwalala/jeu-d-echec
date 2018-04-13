@@ -4,15 +4,15 @@ JC = javac
 	$(JC) $*.java
 
 CLASSES = \
-	Jeu.java \
 	Piece.java \
-	Plateau.java \
 	Fou.java \
 	Pion.java \
 	Tour.java \
 	Dame.java \
 	Cavalier.java \
-	Roi.java
+	Roi.java \
+	Jeu.java \
+	Plateau.java
 
 default: classes
 

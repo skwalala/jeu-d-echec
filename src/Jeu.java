@@ -12,7 +12,7 @@ public class Jeu{
 	    return input.nextLine();
     }
 
-	public static void verif(char[] possA, char[] possB, String camp){
+	public static void verif(char[] possA, char[] possB, String camp, Piece[][] p){
         boolean pieceCorrect = false;
         boolean deplacementCorrect = false;
         int verification = 0;
@@ -45,10 +45,10 @@ public class Jeu{
          String deplacementJoue = getCoordonnéeDeplacement();
          char caractNewXPiece = deplacementJoue.charAt(0);
          char caractNewYPiece = deplacementJoue.charAt(1);
-         if(!Plateau[xPiece][yPiece].seDeplace(p, caractNewXPiece, caractNewYPiece)){
+         if(!p[xPiece][yPiece].seDeplace(p, caractNewXPiece, caractNewYPiece)){
              System.out.println("Erreur : veuillez choisir un autre emplacement.");
          } else {
-             Plateau[xPiece][yPiece].seDeplace(p, caractNewXPiece, caractNewYPiece);
+             p[xPiece][yPiece].seDeplace(p, caractNewXPiece, caractNewYPiece);
          }
         }
     }
@@ -66,9 +66,9 @@ public class Jeu{
     	while (!partieFinie) {
     		p.affichePlateau();
 			camp = "Blanc";
-    		verif(possA, possB, camp);
+    		verif(possA, possB, camp,p.getPlateau());
 			camp = "Noir";
-			verif(possA, possB, camp);
+		verif(possA, possB, camp,p.getPlateau());
     	}
     }
 }
