@@ -109,6 +109,74 @@ public class Tour extends Piece
        		return false;
        	}
 
+       	public int[][] getAllDeplacements(Piece[][] p) {
+           int tabDeplacements[][] = new int[8][8];
+
+            int initX = super.getPosX();
+            int initY = super.getPosY();
+
+            for (int i =0; i<8; i++){
+                for (int j =0; j<8; j++){
+                    tabDeplacements[i][j]=0;
+                }
+            }
+
+            int x = initX;
+            int y = initY;
+
+            while (x<8) {
+                if (p[x][y]==null){
+                    tabDeplacements[x][y] = 1;
+                    x++;
+                } else {
+                    if (!(p[x][y].getCouleur()==super.getCouleur())) {
+                        tabDeplacements[x][y] = 1;
+                    }
+                    break;
+                }
+            }
+
+            while (x>=0) {
+                if (p[x][y]==null){
+                    tabDeplacements[x][y] = 1;
+                    x--;
+                } else {
+                    if (!(p[x][y].getCouleur()==super.getCouleur())) {
+                        tabDeplacements[x][y] = 1;
+                    }
+                    break;
+                }
+            }
+
+            while (y<8) {
+                if (p[x][y]==null){
+                    tabDeplacements[x][y] = 1;
+                    y++;
+                } else {
+                    if (!(p[x][y].getCouleur()==super.getCouleur())) {
+                        tabDeplacements[x][y] = 1;
+                    }
+                    break;
+                }
+            }
+
+            while (y>=0) {
+                if (p[x][y]==null){
+                    tabDeplacements[x][y] = 1;
+                    y--;
+                } else {
+                    if (!(p[x][y].getCouleur()==super.getCouleur())) {
+                        tabDeplacements[x][y] = 1;
+                    }
+                    break;
+                }
+            }
+
+
+
+            return tabDeplacements;
+        }
+
 
 
 }
