@@ -45,12 +45,21 @@ public class Jeu{
          String deplacementJoue = getCoordonnéeDeplacement();
          char caractNewXPiece = deplacementJoue.charAt(0);
          char caractNewYPiece = deplacementJoue.charAt(1);
-	 System.out.println(xPiece+" "+yPiece);
-	 System.out.println(caractNewXPiece+" "+caractNewYPiece);
-         if(!p[xPiece][yPiece].seDeplace(p, caractNewXPiece, caractNewYPiece)){
+         int newXPiece = 0;
+         int newYPiece = 0;
+         System.out.println(xPiece+" "+yPiece);
+	     System.out.println(caractNewXPiece+" "+caractNewYPiece);
+	     for (int i = 0; i<possA.length; i++) {
+             if (possA[i] == caractNewXPiece){
+                 newXPiece = i;
+                 newYPiece = Character.getNumericValue(caractNewYPiece);
+             }
+         }
+         if(!p[xPiece][yPiece].seDeplace(p, newXPiece, newYPiece)){
              System.out.println("Erreur : veuillez choisir un autre emplacement.");
          } else {
-             p[xPiece][yPiece].seDeplace(p, caractNewXPiece, caractNewYPiece);
+             p[xPiece][yPiece].seDeplace(p, newXPiece, newYPiece);
+             deplacementCorrect = true;
          }
         }
     }
