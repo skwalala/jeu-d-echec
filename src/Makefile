@@ -16,9 +16,13 @@ CLASSES = \
 
 default: classes
 
-test: clean classes
+test: clean classes exec
 
 classes : $(CLASSES:.java=.class)
 
 clean :
 	rm *.class
+
+exec :
+	clear
+	java Jeu
