@@ -54,6 +54,20 @@ public class Dame extends Piece{
 					grille[i][j]=1;
 			}
 		}
+		for (int x=1; x<8; x++){
+      		if(super.getPosX()+x < 8 && super.getPosY()+x <8){
+ 				grille[super.getPosX()+x][super.getPosY()+x]=1;
+ 			}
+ 			if(super.getPosX()+x < 8 && super.getPosY()-x >=0){
+ 				grille[super.getPosX()+x][super.getPosY()-x]=1;
+ 			}
+ 			if(super.getPosX()-x >=0 && super.getPosY()+x <8){
+ 				grille[super.getPosX()-x][super.getPosY()+x]=1;
+ 			}
+ 			if(super.getPosX()-x >=0 && super.getPosY()-x >=0){
+ 				grille[super.getPosX()-x][super.getPosY()-x]=1;
+ 			}
+ 		}
 		return grille;
 	}
 }
