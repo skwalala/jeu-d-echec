@@ -29,7 +29,7 @@ public class Jeu{
                     if ((pieceJoue.length() == 2) && (caractXPiece == possA[i]) && (caractYPiece == possB[j])) {
                         if (possA[i] == caractXPiece){
                             xPiece = i;
-                            yPiece = caractYPiece;
+                            yPiece = Character.getNumericValue(caractYPiece);
                             verification = 1;
                         }
                     }
@@ -45,6 +45,8 @@ public class Jeu{
          String deplacementJoue = getCoordonnéeDeplacement();
          char caractNewXPiece = deplacementJoue.charAt(0);
          char caractNewYPiece = deplacementJoue.charAt(1);
+	 System.out.println(xPiece+" "+yPiece);
+	 System.out.println(caractNewXPiece+" "+caractNewYPiece);
          if(!p[xPiece][yPiece].seDeplace(p, caractNewXPiece, caractNewYPiece)){
              System.out.println("Erreur : veuillez choisir un autre emplacement.");
          } else {
