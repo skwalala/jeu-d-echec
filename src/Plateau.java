@@ -7,8 +7,8 @@ class Plateau{
     this.plateau = new Piece[8][8];
     for (int i = 0 ; i < 8 ; i++ ) {
       if (i == 1 ) {
-        for ( int j = 0 ; j < 8 ; j++ ) {
-          this.plateau[j][i] = new Piece(j,i,"noir","P");
+        for ( int j = 1 ; j < 8 ; j++ ) {
+          this.plateau[j][i] = new Piece(j,i,"blanc","P");
         }
       }
       if (i == 6 ) {
