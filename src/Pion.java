@@ -15,7 +15,7 @@ class Pion extends Piece{
 	/*
 	 * reçoit une demande de déplacement et l'éxecute si celle-ci est possible
 	 */
-	public boolean seDeplace(int x, int y, Piece[][] p){
+	public boolean seDeplace(Piece[][] p, int x, int y){
 		return checkDeplace(x,y,p);
 	}
 

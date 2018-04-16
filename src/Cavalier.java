@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Cavalier extends Piece{
 	public Cavalier(int x, int y, String couleur){
-		super(x,y,"C",couleur);
+		super(x,y,couleur,"C");
 	}
 
 	public boolean seDeplace(Piece[][] p, int dx, int dy){

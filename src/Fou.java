@@ -16,7 +16,8 @@ class Fou extends Piece{
 	/*
 	 * reçoit une demande de déplacement et l'éxecute si celle-ci est possible
 	 */
-	public boolean seDeplace(int x, int y, Piece[][] p) {
+	public boolean seDeplace(Piece[][] p, int x, int y) {
+		System.out.println("seDeplace");
 		if (checkDeplace(x,y,p)){
 			if (!(p[x][y]==null)) {
 				if (!(p[x][y].getCouleur()==super.getCouleur())) {
@@ -40,8 +41,10 @@ class Fou extends Piece{
 		int b=initY;
 		diffX=Math.abs(diffX);
 		diffY=Math.abs(diffY);
+		System.out.println(newX+" "+newY);
 
 		if (diffX==diffY) {
+			System.out.println("diff ok");
 			if( newX<initX && newY<initY ) {
 				for (int a=initX-1 ; a>newX-1 ; a--){
 					b--;

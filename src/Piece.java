@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Piece{
+abstract class Piece{
   private int x;
   private int y;
   private String couleur;
@@ -47,7 +47,7 @@ class Piece{
     return this.nom = nom;
   }
 
-  public boolean seDeplace(Piece[][] p, int dx, int dy){return false;} //temporaire
+  public abstract boolean seDeplace(Piece[][] p, int x, int y); //temporaire
 
   public boolean estOcuppeParPieceEquipe(int x, int y, String couleur, Piece[][] plateau){
 	if (plateau[x][y]!=null){

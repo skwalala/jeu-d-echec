@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Dame extends Piece{
 	public Dame(int x, int y, String couleur){
-		super(x,y,"D",couleur);
+		super(x,y,couleur,"D");
 	}
 
 	public boolean seDeplace(Piece[][] p, int dx, int dy){

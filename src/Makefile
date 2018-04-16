@@ -21,7 +21,7 @@ test: clean classes exec
 classes : $(CLASSES:.java=.class)
 
 clean :
-	rm *.class
+	-rm *.class
 
 exec :
 	clear

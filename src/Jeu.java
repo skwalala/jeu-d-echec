@@ -51,13 +51,14 @@ public class Jeu {
             int newXPiece = 0;
             int newYPiece = 0;
             System.out.println(xPiece + " " + yPiece);
-            System.out.println(caractNewXPiece + " " + caractNewYPiece);
             for (int i = 0; i < possA.length; i++) {
                 if (possA[i] == caractNewXPiece) {
                     newXPiece = i;
-                    newYPiece = Character.getNumericValue(caractNewYPiece);
+                    newYPiece = Character.getNumericValue(caractNewYPiece)-1;
                 }
             }
+            System.out.println(newXPiece + " " + newYPiece);
+	    System.out.println(p[xPiece][yPiece].getNom());
             if (!p[xPiece][yPiece].seDeplace(p, newXPiece, newYPiece)) {
                 System.out.println("Erreur : veuillez choisir un autre emplacement.");
             } else {
@@ -80,9 +81,11 @@ public class Jeu {
     	char[] possB = {'0','1', '2', '3', '4', '5', '6', '7'};
     	while (!partieFinie) {
     		p.affichePlateau();
-			camp = "blanc";
+		camp = "blanc";
     		verif(possA, possB, camp,p.getPlateau());
-			camp = "noir";
+
+    		p.affichePlateau();
+		camp = "noir";
 		verif(possA, possB, camp,p.getPlateau());
     	}
     }
