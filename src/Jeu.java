@@ -30,7 +30,7 @@ public class Jeu {
                         xPiece = i;
                         yPiece = j-1;
                         System.out.println("xPiece = "+xPiece+" yPiece = "+yPiece);
-                        if (p[xPiece][yPiece].getCouleur() != null){
+                        if (p[xPiece][yPiece] != null){
                             if (p[xPiece][yPiece].getCouleur().equals(camp)) {
                                 verification = 1;
                             }
@@ -58,11 +58,12 @@ public class Jeu {
                 }
             }
             System.out.println(newXPiece + " " + newYPiece);
-	    System.out.println(p[xPiece][yPiece].getNom());
+            System.out.println(p[xPiece][yPiece].getNom());
             if (!p[xPiece][yPiece].seDeplace(p, newXPiece, newYPiece)) {
                 System.out.println("Erreur : veuillez choisir un autre emplacement.");
             } else {
-                p[xPiece][yPiece].seDeplace(p, newXPiece, newYPiece);
+                p[newXPiece][newYPiece] = p[xPiece][yPiece];
+                p[xPiece][yPiece] = null;
                 deplacementCorrect = true;
             }
         }
