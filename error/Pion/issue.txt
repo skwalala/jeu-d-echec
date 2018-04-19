@@ -1,0 +1,1 @@
+pion can't move because we change team position => change pion polarity

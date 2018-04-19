@@ -1,0 +1,1 @@
+Dame can't move diagonal

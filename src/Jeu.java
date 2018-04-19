@@ -29,9 +29,10 @@ public class Jeu {
                     if ((pieceJoue.length() == 2) && (caractXPiece == possA[i]) && (caractYPiece == possB[j])) {
                         xPiece = i;
                         yPiece = j-1;
-                        System.out.println("xPiece = "+xPiece+" yPiece = "+yPiece);
+                        //System.out.println("xPiece = "+xPiece+" yPiece = "+yPiece);
                         if (p[xPiece][yPiece] != null){
                             if (p[xPiece][yPiece].getCouleur().equals(camp)) {
+			    	System.out.println(p[xPiece][yPiece].getNom());
                                 verification = 1;
                             }
                         }
@@ -50,15 +51,14 @@ public class Jeu {
             char caractNewYPiece = deplacementJoue.charAt(1);
             int newXPiece = 0;
             int newYPiece = 0;
-            System.out.println(xPiece + " " + yPiece);
+            //System.out.println(xPiece + " " + yPiece);
             for (int i = 0; i < possA.length; i++) {
                 if (possA[i] == caractNewXPiece) {
                     newXPiece = i;
                     newYPiece = Character.getNumericValue(caractNewYPiece)-1;
                 }
             }
-            System.out.println(newXPiece + " " + newYPiece);
-            System.out.println(p[xPiece][yPiece].getNom());
+            //System.out.println(newXPiece + " " + newYPiece);
             if (!p[xPiece][yPiece].seDeplace(p, newXPiece, newYPiece)) {
                 System.out.println("Erreur : veuillez choisir un autre emplacement.");
             } else {
@@ -70,9 +70,10 @@ public class Jeu {
     }
 
 
-    public void checkEchec(){
+    public static void checkEchec(){
 	    
     }
+
 
     public static void main(String[] args) {
     	Plateau p = new Plateau();
@@ -84,10 +85,14 @@ public class Jeu {
     		p.affichePlateau();
 		camp = "blanc";
     		verif(possA, possB, camp,p.getPlateau());
+		System.out.print("\033\143");
+
 
     		p.affichePlateau();
 		camp = "noir";
 		verif(possA, possB, camp,p.getPlateau());
+		System.out.print("\033\143");
+
     	}
     }
 }

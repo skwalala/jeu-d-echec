@@ -43,10 +43,11 @@ class Plateau{
   }
 
   public void affichePlateau(){
-          System.out.println("+---+---+---+---+---+---+---+---+");
+    System.out.println("   A   B   C   D   E   F   G   H");
+    System.out.println(" +---+---+---+---+---+---+---+---+");
     for (int i = 0 ; i < 8 ; i++ ) {
 
-      System.out.print("| ");
+      System.out.print((i+1)+"| ");
       for (int j = 0 ; j < 8 ; j++ ) {
         if ((this.plateau[j][i]) instanceof Piece) {
           System.out.print((this.plateau[j][i]).getNom() + " | ");
@@ -56,7 +57,7 @@ class Plateau{
 
       }
       System.out.println();
-      System.out.println("+---+---+---+---+---+---+---+---+");
+      System.out.println(" +---+---+---+---+---+---+---+---+");
     }
   }
 
