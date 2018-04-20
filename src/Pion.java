@@ -26,7 +26,7 @@ class Pion extends Piece{
 		int initX=super.getPosX();
 		int initY=super.getPosY();
 
-		if (super.getCouleur()=="noir"){
+		if (super.getCouleur()=="blanc"){
 			if (newX==initX){ // déplacement vertical
 				if (initY==1){ // si la pièce est à sa position initiale (au début de partie)
 					if (newY==2){ // déplacement de une case
@@ -49,7 +49,7 @@ class Pion extends Piece{
 			} else if (newX==initX-1 || newX==initX+1){ // déplacement diagonale
 				if (newY==initY+1){ // déplacement de une case
 					if (!(p[newX][newY]==null)){
-						if (p[newX][newY].getCouleur()=="blanc"){
+						if (p[newX][newY].getCouleur()=="noir"){
 							return true;
 						} else return false;
 					} else return false;
@@ -80,7 +80,7 @@ class Pion extends Piece{
 			} else if (newX==initX-1 || newX==initX+1){ // déplacement diagonale
 				if (newY==initY-1){ // déplacement de une case
 					if (!(p[newX][newY]==null)){
-						if (p[newX][newY].getCouleur()=="noir"){
+						if (p[newX][newY].getCouleur()=="blanc"){
 							return true;
 						} else return false;
 					} else return false;
@@ -106,7 +106,7 @@ class Pion extends Piece{
 
 		tabDeplacements[initX][initY] = 1;
 
-		if (super.getCouleur()=="noir"){
+		if (super.getCouleur()=="blanc"){
 			if (initY==1){ // si la pièce est à sa position initiale (au début de partie)
 				if (p[initX][initY+1]==null){
 					tabDeplacements[initX][initY+1]=1;
@@ -116,14 +116,14 @@ class Pion extends Piece{
 				}
 				if (initX+1 < 8){
 					if (!(p[initX+1][initY+1]==null)) {
-						if (p[initX+1][initY+1].getCouleur()=="blanc") {
+						if (p[initX+1][initY+1].getCouleur()=="noir") {
 							tabDeplacements[initX+1][initY+1]=1;
 						}
 					}
 				}
 				if (initX-1 >= 0){
 					if (p[initX-1][initY+1]==null) {
-						if (p[initX-1][initY+1].getCouleur()=="blanc") {
+						if (p[initX-1][initY+1].getCouleur()=="noir") {
 							tabDeplacements[initX+1][initY+1]=1;
 						}
 					}
@@ -133,17 +133,17 @@ class Pion extends Piece{
 					tabDeplacements[initX][initY+1]=1;
 				}
 				if (!(p[initX+1][initY+1]==null)) {
-					if (p[initX+1][initY+1].getCouleur()=="blanc") {
+					if (p[initX+1][initY+1].getCouleur()=="noir") {
 						tabDeplacements[initX+1][initY+1]=1;
 					}
 				}
 				if (p[initX-1][initY+1]==null) {
-					if (p[initX-1][initY+1].getCouleur()=="blanc") {
+					if (p[initX-1][initY+1].getCouleur()=="noir") {
 						tabDeplacements[initX+1][initY+1]=1;
 					}
 				}
 			}
-		} else { // pièce de couleur blanche
+		} else { // pièce de couleur noir
 			if (initY==6){ // si la pièce est à sa position initiale (au début de partie)
 				if (p[initX][initY-1]==null){
 					tabDeplacements[initX][initY-1]=1;

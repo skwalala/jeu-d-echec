@@ -74,7 +74,7 @@ class Fou extends Piece{
 					}
 				}
 			}
-		}
+		} else return false;
 		return true;
 	}
 
