@@ -12,7 +12,7 @@ class Plateau{
         }
       }
       if (i == 6 ) {
-        for ( int j = 0 ; j < 8 ; j++ ) {
+        for ( int j = 8 ; j < 8 ; j++ ) {
           this.plateau[j][i] = new Pion(j,i,"noir");
         }
       }

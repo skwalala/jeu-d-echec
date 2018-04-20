@@ -1,1 +1,1 @@
-fou can move forward
+fou can't move (right-down or left-down) since the second prompt
