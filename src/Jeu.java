@@ -22,18 +22,20 @@ public class Jeu {
         int yPiece = 0;
         while (!pieceCorrect) {
             String pieceJoue = getCoordonnéePiece(camp);
-            caractXPiece = pieceJoue.charAt(0);
-            caractYPiece = pieceJoue.charAt(1);
-            for (int i = 0; i < possA.length; i++) {
-                for (int j = 0; j < possB.length; j++) {
-                    if ((pieceJoue.length() == 2) && (caractXPiece == possA[i]) && (caractYPiece == possB[j])) {
-                        xPiece = i;
-                        yPiece = j-1;
-                        //System.out.println("xPiece = "+xPiece+" yPiece = "+yPiece);
-                        if (p[xPiece][yPiece] != null){
-                            if (p[xPiece][yPiece].getCouleur().equals(camp)) {
-			    	System.out.println(p[xPiece][yPiece].getNom());
-                                verification = 1;
+            if ((!pieceJoue.equals("")) && (!pieceJoue.equals(" "))){
+                caractXPiece = pieceJoue.charAt(0);
+                caractYPiece = pieceJoue.charAt(1);
+                for (int i = 0; i < possA.length; i++) {
+                    for (int j = 0; j < possB.length; j++) {
+                        if (((pieceJoue.length() == 2)) && (caractXPiece == possA[i]) && (caractYPiece == possB[j])){
+                            xPiece = i;
+                            yPiece = j;
+                            //System.out.println("xPiece = "+xPiece+" yPiece = "+yPiece);
+                            if (p[xPiece][yPiece] != null) {
+                                if (p[xPiece][yPiece].getCouleur().equals(camp)) {
+                                    System.out.println(p[xPiece][yPiece].getNom());
+                                    verification = 1;
+                                }
                             }
                         }
                     }
@@ -80,7 +82,7 @@ public class Jeu {
     	String camp = "";
     	boolean partieFinie = false;
     	char[] possA = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
-    	char[] possB = {'0','1', '2', '3', '4', '5', '6', '7'};
+    	char[] possB = {'1', '2', '3', '4', '5', '6', '7','8'};
     	while (!partieFinie) {
     		p.affichePlateau();
 		camp = "blanc";
