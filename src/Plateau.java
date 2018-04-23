@@ -51,7 +51,24 @@ class Plateau extends JFrame{
       }
     }
 
-  
+    for (int i = 0 ; i < 8 ; i++) {
+      for (int j = 0 ; j < 8 ; j++) {
+        if (i > 1 && i < 6) {
+          JPanel pBut = new JPanel();
+          pBut.add(new JButton("-"));
+          pGrille.add(pBut);
+        }else {
+          JPanel pBut = new JPanel();
+          pBut.add(new JButton((plateau[j][i]).getNom()));
+          pGrille.add(pBut);
+        }
+      }
+    }
+    JPanel pAffiche = new JPanel();
+    pAffiche.setLayout(new BoxLayout(pAffiche, BoxLayout.X_AXIS));
+    pAffiche.add(pGrille);
+    pAffiche.setBorder(BorderFactory.createEmptyBorder(30,30,30,30));
+    setContentPane(pAffiche);
   }
 
   public void affichePlateau(){
