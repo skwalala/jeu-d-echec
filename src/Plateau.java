@@ -19,35 +19,35 @@ class Plateau extends JFrame{
 
     this.plateau = new Piece[8][8];
     this.plateau[0][0] = new Tour(0,0,"blanc");
-    this.plateau[0][1] = new Cavalier(0,1,"blanc");
-    this.plateau[0][2] = new Fou(0,2,"blanc");
-    this.plateau[0][3] = new Dame(0,3,"blanc");
-    this.plateau[0][4] = new Roi(0,4,"blanc");
-    this.plateau[0][5] = new Fou(0,5,"blanc");
-    this.plateau[0][6] = new Cavalier(0,6,"blanc");
-    this.plateau[0][7] = new Tour(0,7,"blanc");
-    this.plateau[7][0] = new Tour(7,0,"noir");
-    this.plateau[7][1] = new Cavalier(7,1,"noir");
-    this.plateau[7][2] = new Fou(7,2,"noir");
-    this.plateau[7][3] = new Dame(7,3,"noir");
-    this.plateau[7][4] = new Roi(7,4,"noir");
-    this.plateau[7][5] = new Fou(7,5,"noir");
-    this.plateau[7][6] = new Cavalier(7,6,"noir");
+    this.plateau[1][0] = new Cavalier(1,0,"blanc");
+    this.plateau[2][0] = new Fou(2,0,"blanc");
+    this.plateau[3][0] = new Dame(3,0,"blanc");
+    this.plateau[4][0] = new Roi(4,0,"blanc");
+    this.plateau[5][0] = new Fou(5,0,"blanc");
+    this.plateau[6][0] = new Cavalier(6,0,"blanc");
+    this.plateau[7][0] = new Tour(7,0,"blanc");
+    this.plateau[0][7] = new Tour(0,7,"noir");
+    this.plateau[1][7] = new Cavalier(1,7,"noir");
+    this.plateau[2][7] = new Fou(2,7,"noir");
+    this.plateau[3][7] = new Dame(3,7,"noir");
+    this.plateau[4][7] = new Roi(4,7,"noir");
+    this.plateau[5][7] = new Fou(5,7,"noir");
+    this.plateau[6][7] = new Cavalier(6,7,"noir");
     this.plateau[7][7] = new Tour(7,7,"noir");
     for (int i = 0 ; i < 8 ; i++ ) {
       if (i == 1 ) {
         for ( int j = 0 ; j < 8 ; j++ ) {
-          this.plateau[i][j] = new Pion(i,j,"blanc");
+          this.plateau[j][i] = new Pion(j,i,"blanc");
         }
       }
       if (i == 6 ) {
         for ( int j = 0 ; j < 8 ; j++ ) {
-          this.plateau[i][j] = new Pion(i,j,"noir");
+          this.plateau[j][i] = new Pion(j,i,"noir");
         }
       }
       if (i > 1 && i < 6) {
         for ( int j = 0 ; j < 8 ; j++ ) {
-          this.plateau[i][j] = null;
+          this.plateau[j][i] = null;
         }
       }
     }
@@ -56,14 +56,14 @@ class Plateau extends JFrame{
         if (i > 1 && i < 6) {
           JPanel pBut = new JPanel();
           but = new JButton("-");
-          controlButton = new ControlButton(this, i,j);
+          controlButton = new ControlButton(this, j,i);
           (but).addActionListener(controlButton);
           pBut.add(but);
           pGrille.add(pBut);
         }else {
           JPanel pBut = new JPanel();
-          but = new JButton((plateau[i][j]).getNom());
-          controlButton = new ControlButton(this, i,j);
+          but = new JButton((plateau[j][i]).getNom());
+          controlButton = new ControlButton(this, j,i);
           (but).addActionListener(controlButton);
           pBut.add(but);
           pGrille.add(pBut);
@@ -85,8 +85,8 @@ class Plateau extends JFrame{
     for (int i = 0 ; i < 8 ; i++ ) {
       System.out.print((i+1) + " | ");
       for (int j = 0 ; j < 8 ; j++ ) {
-        if ((this.plateau[i][j]) instanceof Piece) {
-          System.out.print((this.plateau[i][j]).getNom() + " | ");
+        if ((this.plateau[j][i]) instanceof Piece) {
+          System.out.print((this.plateau[j][i]).getNom() + " | ");
         }else {
           System.out.print("- | ");
         }
