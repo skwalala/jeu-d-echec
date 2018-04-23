@@ -12,6 +12,7 @@ CLASSES = \
 	Cavalier.java \
 	Roi.java \
 	Jeu.java \
+	ControlButton.java \
 	Plateau.java
 
 default: classes
