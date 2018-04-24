@@ -67,6 +67,8 @@ public class Jeu {
                 p[newXPiece][newYPiece] = p[xPiece][yPiece];
                 p[xPiece][yPiece] = null;
                 deplacementCorrect = true;
+		p[newXPiece][newYPiece].setPosX(newXPiece);
+		p[newXPiece][newYPiece].setPosY(newYPiece);
             }
         }
     }
