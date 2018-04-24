@@ -33,8 +33,8 @@ public class Tour extends Piece
 
             if ((y * deplacementY == 0) && (x < deplacementX)) {
                 for (int i = 0; i < diffX; i++) {
-                    if (p[a - 1][0] == null) {
-                        a--;
+                    if (p[a + 1][0] == null) {
+                        a++;
                     } else {
                         return false;
                     }
@@ -44,8 +44,8 @@ public class Tour extends Piece
 
             if ((y * deplacementY == 0) && (x > deplacementX)) {
                 for (int i = 0; i < diffX; i++) {
-                    if (p[a + 1][0] == null) {
-                        a++;
+                    if (p[a - 1][0] == null) {
+                        a--;
                     } else {
                         return false;
                     }
@@ -56,8 +56,8 @@ public class Tour extends Piece
 
             if ((x * deplacementX == 0) && (y < deplacementY)) {
                 for (int i = 0; i < diffY; i++) {
-                    if (p[0][b - 1] == null) {
-                        b--;
+                    if (p[0][b + 1] == null) {
+                        b++;
                     } else {
                         return false;
                     }
@@ -66,8 +66,8 @@ public class Tour extends Piece
 
             if ((x * deplacementX == 0) && (y > deplacementY)) {
                 for (int i = 0; i < diffY; i++) {
-                    if (p[0][b + 1] == null) {
-                        b++;
+                    if (p[0][b - 1] == null) {
+                        b--;
                     } else {
                         return false;
                     }
