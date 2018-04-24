@@ -49,7 +49,7 @@ class Pion extends Piece{
 			} else if (newX==initX-1 || newX==initX+1){ // déplacement diagonale
 				if (newY==initY+1){ // déplacement de une case
 					if (!(p[newX][newY]==null)){
-						if (p[newX][newY].getCouleur()=="noir"){
+						if (p[newX][newY].getCouleur().equals("noir")){
 							return true;
 						} else return false;
 					} else return false;
@@ -80,7 +80,7 @@ class Pion extends Piece{
 			} else if (newX==initX-1 || newX==initX+1){ // déplacement diagonale
 				if (newY==initY-1){ // déplacement de une case
 					if (!(p[newX][newY]==null)){
-						if (p[newX][newY].getCouleur()=="blanc"){
+						if (p[newX][newY].getCouleur().equals("blanc")){
 							return true;
 						} else return false;
 					} else return false;
