@@ -6,12 +6,19 @@ public class Dame extends Piece{
 	}
 
 	public boolean seDeplace(Piece[][] p, int dx, int dy){
-		if ((super.getPosX()==dx || super.getPosY()==dy) && checkDeplace(p,dx,dy)) //déplacement comme tour
+		if ((super.getPosX()==dx || super.getPosY()==dy) && checkDeplace(p,dx,dy)){ //déplacement comme tour
+			if (super.getPosX()==dx){
+				System.out.println("deplacement haut-bas");
+			}
+			if (super.getPosY()==dy){
+				System.out.println("deplacement gauche-droite");
+			}
 			return true;
-		else{
+		}else{
 			int i;
 			for (i=0; i>=super.getPosX()-dx; i--){} //place i en tant que différence entre la position initiale et la position demandée
 			for (i=i; i<super.getPosX()-dx; i++){} //pareil mais dans l'autre sens
+			System.out.println(i);
 			if (super.getPosY()-dy==i && checkDeplace(p,dx,dy)) //vérifie si la différence est la même sur l'axe Y
 				return true;
 		}
