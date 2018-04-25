@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.Math;
 
 public class Dame extends Piece{
 	public Dame(int x, int y, String couleur){
@@ -15,12 +16,13 @@ public class Dame extends Piece{
 			}
 			return true;
 		}else{
-			int i;
-			for (i=0; i>=super.getPosX()-dx; i--){} //place i en tant que différence entre la position initiale et la position demandée
-			for (i=i; i<super.getPosX()-dx; i++){} //pareil mais dans l'autre sens
-			System.out.println(i);
-			if (super.getPosY()-dy==i && checkDeplace(p,dx,dy)) //vérifie si la différence est la même sur l'axe Y
+			int diffX=Math.abs(dx-super.getPosX());
+			int diffY=Math.abs(dy-super.getPosY());
+			System.out.println(diffX);
+			System.out.println(diffY);
+			if(diffX==diffY && checkDeplace(p,dx,dy)){
 				return true;
+			}
 		}
 		return false;
 	}
@@ -37,15 +39,19 @@ public class Dame extends Piece{
 			}
 			if (i<dx){
 				i++;
+				System.out.println(i);
 			}
 			if (i>dx){
 				i--;
+				System.out.println(i);
 			}
 			if (j<dy){
 				j++;
+				System.out.println(j);
 			}
 			if (j>dy){
 				j--;
+				System.out.println(j);
 			}
 		}
 		return !super.estOcuppeParPieceEquipe(dx,dy,super.getCouleur(),p);

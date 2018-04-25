@@ -3,7 +3,7 @@ public class Jeu {
     static final Scanner input = new Scanner(System.in);
 
     public static String getCoordonnéePiece(String camp) {
-        System.out.println(camp.concat(" c'est à vous, qu'elle pièce vous voulez déplacé ? "));
+        System.out.println(camp.concat(" c'est à vous, qu'elle pièce vous voulez déplacer ? "));
         return input.nextLine();
     }
 
@@ -86,16 +86,14 @@ public class Jeu {
     	char[] possA = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
     	char[] possB = {'1', '2', '3', '4', '5', '6', '7','8'};
     	while (!partieFinie) {
+    	    p.affichePlateau();
+		    camp = "blanc";
+		    verif(possA, possB, camp,p.getPlateau());
+		    System.out.print("\033\143");
     		p.affichePlateau();
-		camp = "blanc";
-    		verif(possA, possB, camp,p.getPlateau());
-		System.out.print("\033\143");
-
-
-    		p.affichePlateau();
-		camp = "noir";
-		verif(possA, possB, camp,p.getPlateau());
-		System.out.print("\033\143");
+		    camp = "noir";
+		    verif(possA, possB, camp,p.getPlateau());
+		    System.out.print("\033\143");
 
     	}
     }
