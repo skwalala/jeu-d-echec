@@ -106,8 +106,8 @@ public class Tour extends Piece
          {
             return super.getPosY();
          }
-
-         public boolean seDeplace(int x, int y, Piece[][] p) {
+	
+         public boolean seDeplace(Piece[][] p, int x, int y) {
        		System.out.println("seDeplace");
        		if (estValide(x,y,p)){
        			if (!(p[x][y]==null)) {
