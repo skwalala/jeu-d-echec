@@ -35,6 +35,9 @@ public class Tour extends Piece
                 for (int i = 0; i < diffX; i++) {
                     if (p[a + 1][0] == null) {
                         a++;
+                        if(a == deplacementX){
+                          return true;
+                        }
                     } else {
                         return false;
                     }
@@ -46,6 +49,9 @@ public class Tour extends Piece
                 for (int i = 0; i < diffX; i++) {
                     if (p[a - 1][0] == null) {
                         a--;
+                        if(a == deplacementX){
+                          return true;
+                        }
                     } else {
                         return false;
                     }
@@ -58,6 +64,9 @@ public class Tour extends Piece
                 for (int i = 0; i < diffY; i++) {
                     if (p[0][b + 1] == null) {
                         b++;
+                        if(b == deplacementY){
+                          return true;
+                        }
                     } else {
                         return false;
                     }
@@ -68,6 +77,9 @@ public class Tour extends Piece
                 for (int i = 0; i < diffY; i++) {
                     if (p[0][b - 1] == null) {
                         b--;
+                        if(b == deplacementY){
+                          return true;
+                        }
                     } else {
                         return false;
                     }
@@ -95,7 +107,8 @@ public class Tour extends Piece
             return super.getPosY();
          }
 
-         public boolean seDeplace(Piece[][] p,int x, int y) {
+         public boolean seDeplace(int x, int y, Piece[][] p) {
+       		System.out.println("seDeplace");
        		if (estValide(x,y,p)){
        			if (!(p[x][y]==null)) {
        				if (!(p[x][y].getCouleur()==super.getCouleur())) {
@@ -104,7 +117,6 @@ public class Tour extends Piece
        			} else {
        				return true;
        			}
-       		} else if (estValide(x,y,p)==false){
        		}
        		return false;
        	}
