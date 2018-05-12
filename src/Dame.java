@@ -7,22 +7,13 @@ public class Dame extends Piece{
 	}
 
 	public boolean seDeplace(Piece[][] p, int dx, int dy){
-		if ((super.getPosX()==dx || super.getPosY()==dy) && checkDeplace(p,dx,dy)){ //déplacement comme tour
-			if (super.getPosX()==dx){
-				System.out.println("deplacement haut-bas");
-			}
-			if (super.getPosY()==dy){
-				System.out.println("deplacement gauche-droite");
-			}
-			return true;
-		}else{
-			int diffX=Math.abs(dx-super.getPosX());
-			int diffY=Math.abs(dy-super.getPosY());
-			System.out.println(diffX);
-			System.out.println(diffY);
-			if(diffX==diffY && checkDeplace(p,dx,dy)){
-				return true;
-			}
+		if (super.getPosX()==dx || super.getPosY()==dy){
+			System.out.println("tour like");
+			return checkDeplace(p, dx, dy);
+		}else if(Math.abs(dx-super.getPosX())==Math.abs(dy-super.getPosY())){
+			System.out.println("fou like");
+			return checkDeplace(p, dx, dy);
+
 		}
 		return false;
 	}
@@ -34,24 +25,24 @@ public class Dame extends Piece{
 		int i=initX;
 		int j=initY;
 		while(i!=dx && j!=dy){
-			if (p[i][j]!=null){
-			 return false;
-			}
 			if (i<dx){
 				i++;
-				System.out.println(i);
 			}
 			if (i>dx){
 				i--;
-				System.out.println(i);
 			}
 			if (j<dy){
 				j++;
-				System.out.println(j);
 			}
 			if (j>dy){
 				j--;
-				System.out.println(j);
+			}
+			System.out.println(i);
+			System.out.println(j);
+			if(i!=dx || j!=dy){
+				if (p[i][j]!=null){
+					return false;
+				}
 			}
 		}
 		return !super.estOcuppeParPieceEquipe(dx,dy,super.getCouleur(),p);
@@ -61,12 +52,14 @@ public class Dame extends Piece{
 		int grille[][] =new int[8][8];
 		for(int i=0; i<8; i++){
 			for (int j=0; j<8; j++){
-				if (i!=super.getPosX() && j!=super.getPosY())
+				if (seDeplace(p,i,j))
 					grille[i][j]=0;
 				else
 					grille[i][j]=1;
 			}
 		}
+
+		/* quesaca ?
 		for (int x=1; x<8; x++){
       		if(super.getPosX()+x < 8 && super.getPosY()+x <8){
  				grille[super.getPosX()+x][super.getPosY()+x]=1;
@@ -82,5 +75,6 @@ public class Dame extends Piece{
  			}
  		}
 		return grille;
+		*/
 	}
 }
