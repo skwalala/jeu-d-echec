@@ -47,7 +47,9 @@ abstract class Piece{
     return this.nom = nom;
   }
 
-  public abstract boolean seDeplace(Piece[][] p, int x, int y); //temporaire
+  public abstract boolean seDeplace(Piece[][] p, int x, int y);
+
+  public abstract int[][] getAllDeplacement(Piece[][] p);
 
   public boolean estOcuppeParPieceEquipe(int x, int y, String couleur, Piece[][] plateau){
 	if (plateau[x][y]!=null){

@@ -121,7 +121,7 @@ public class Tour extends Piece
        		return false;
        	}
 
-       	public int[][] getAllDeplacements(Piece[][] p) {
+       	public int[][] getAllDeplacement(Piece[][] p) {
            int tabDeplacements[][] = new int[8][8];
 
             int initX = super.getPosX();

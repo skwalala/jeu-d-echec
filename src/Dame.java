@@ -76,5 +76,6 @@ public class Dame extends Piece{
  		}
 		return grille;
 		*/
+		return grille;
 	}
 }
