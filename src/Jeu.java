@@ -34,6 +34,7 @@ public class Jeu {
                             if (p[xPiece][yPiece] != null) {
                                 if (p[xPiece][yPiece].getCouleur().equals(camp)) {
                                     System.out.println(p[xPiece][yPiece].getNom());
+				    printAllDeplacement(p,xPiece,yPiece);
                                     verification = 1;
                                 }
                             }
@@ -87,14 +88,29 @@ public class Jeu {
     	char[] possB = {'1', '2', '3', '4', '5', '6', '7','8'};
     	while (!partieFinie) {
     	    p.affichePlateau();
-		    camp = "blanc";
-		    verif(possA, possB, camp,p.getPlateau());
-		    System.out.print("\033\143");
-    		p.affichePlateau();
-		    camp = "noir";
-		    verif(possA, possB, camp,p.getPlateau());
-		    System.out.print("\033\143");
+	    camp = "blanc";
+	    verif(possA, possB, camp,p.getPlateau());
+	    //System.out.print("\033\143");
+	    p.affichePlateau();
+	    camp = "noir";
+	    verif(possA, possB, camp,p.getPlateau());
+	    //System.out.print("\033\143");
+
 
     	}
+    }
+    public static void printAllDeplacement(Piece[][] piece, int x, int y){
+	    if(piece[x][y]!=null){
+	    int[][] deplacement = piece[x][y].getAllDeplacement(piece);
+	    for (int i=0; i<8; i++){
+	    	for (int j=0;j<8; j++){
+			System.out.print(deplacement[j][i]);
+			System.out.print(" ");
+		}
+		System.out.println("");
+	    }
+	    System.out.println(piece[x][y].getNom());
+	    }
+	
     }
 }

@@ -17,7 +17,6 @@ class Fou extends Piece{
 	 * reçoit une demande de déplacement et l'éxecute si celle-ci est possible
 	 */
 	public boolean seDeplace(Piece[][] p, int x, int y) {
-		System.out.println("seDeplace");
 		if (checkDeplace(x,y,p)){
 			if (!(p[x][y]==null)) {
 				if (!(p[x][y].getCouleur()==super.getCouleur())) {
@@ -41,10 +40,8 @@ class Fou extends Piece{
 		int b=initY;
 		diffX=Math.abs(diffX);
 		diffY=Math.abs(diffY);
-		System.out.println(newX+" "+newY);
 
 		if (diffX==diffY) {
-			System.out.println("diff ok");
 			if( newX<initX && newY<initY ) {
 				for (int a=initX-1 ; a>newX-1 ; a--){
 					b--;
@@ -76,88 +73,5 @@ class Fou extends Piece{
 			}
 		} else return false;
 		return true;
-	}
-
-	public int[][] getAllDeplacement(Piece[][] p){
-		int tabDeplacements[][] = new int[8][8];
-
-		int initX = super.getPosX();
-		int initY = super.getPosY();
-
-		boolean finDeDiagonale = false;
-
-		for (int i = 0 ; i < 8 ; i++ ) {
-			for (int j = 0 ; j < 8 ; j++ ) {
-				tabDeplacements[i][j]=0;
-			}
-		}
-
-		tabDeplacements[initX][initY] = 1;
-
-		int x=initX+1;
-		int y=initY+1;
-
-
-		while (x<8 && y<8 && finDeDiagonale==false) {
-			if (p[x][y]==null){
-				tabDeplacements[x][y] = 1;
-				x++;
-				y++;
-			} else {
-				if (!(p[x][y].getCouleur()==super.getCouleur())) {
-					tabDeplacements[x][y] = 1;
-				}
-				finDeDiagonale=true;
-			}	
-		}
-
-		finDeDiagonale=false;
-		x=initX+1;
-		y=initY-1;
-		while (x<8 && y>=0 && finDeDiagonale==false) {
-			if (p[x][y]==null){
-				tabDeplacements[x][y] = 1;
-				x++;
-				y--;
-			} else {
-				if (!(p[x][y].getCouleur()==super.getCouleur())) {
-					tabDeplacements[x][y] = 1;
-				}
-				finDeDiagonale=true;
-			}	
-		}
-
-		finDeDiagonale=false;
-		x=initX-1;
-		y=initY+1;
-		while (x>=0 && y<8 && finDeDiagonale==false) {
-			if (p[x][y]==null){
-				tabDeplacements[x][y] = 1;
-				x--;
-				y++;
-			} else {
-				if (!(p[x][y].getCouleur()==super.getCouleur())) {
-					tabDeplacements[x][y] = 1;
-				}
-				finDeDiagonale=true;
-			}	
-		}
-
-		finDeDiagonale=false;
-		x=initX-1;
-		y=initY-1;
-		while (x<8 && y<8 && finDeDiagonale==false) {
-			if (p[x][y]==null){
-				tabDeplacements[x][y] = 1;
-				x--;
-				y--;
-			} else {
-				if (!(p[x][y].getCouleur()==super.getCouleur())) {
-					tabDeplacements[x][y] = 1;
-				}
-				finDeDiagonale=true;
-			}	
-		}
-		return tabDeplacements;
 	}
 }

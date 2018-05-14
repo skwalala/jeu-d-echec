@@ -37,7 +37,7 @@ class Plateau extends JFrame{
     for (int i = 0 ; i < 8 ; i++ ) {
       if (i == 1 ) {
         for ( int j = 0 ; j < 8 ; j++ ) {
-          this.plateau[j][i] = new Pion(j,i,"blanc");
+         // this.plateau[j][i] = new Pion(j,i,"blanc");
         }
       }
       if (i == 6 ) {
@@ -51,8 +51,8 @@ class Plateau extends JFrame{
         }
       }
     }
-    for (int i = 0 ; i < 8 ; i++) {
-      for (int j = 0 ; j < 8 ; j++) {
+    for (int i = 8 ; i < 8 ; i++) {
+      for (int j = 8 ; j < 8 ; j++) {
         if (i > 1 && i < 6) {
           JPanel pBut = new JPanel();
           but = new JButton("-");

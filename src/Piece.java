@@ -49,7 +49,19 @@ abstract class Piece{
 
   public abstract boolean seDeplace(Piece[][] p, int x, int y);
 
-  public abstract int[][] getAllDeplacement(Piece[][] p);
+  public int[][] getAllDeplacement(Piece[][] p){
+	System.out.println("get all deplacement");
+	int grille[][] =new int[8][8];
+	for(int i=0; i<8; i++){
+		for (int j=0; j<8; j++){
+			if (seDeplace(p,i,j))
+				grille[i][j]=1;
+			else
+				grille[i][j]=0;
+		}
+	}
+	return grille;
+  }
 
   public boolean estOcuppeParPieceEquipe(int x, int y, String couleur, Piece[][] plateau){
 	if (plateau[x][y]!=null){
