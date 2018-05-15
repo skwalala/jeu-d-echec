@@ -33,7 +33,7 @@ public class Roi extends Piece
 
             if (x == deplacementX - 1 && y == deplacementY) {
 
-                if (p[a + 1][0] == null) {
+                if (p[a + 1][b] == null) {
                     return true;
                 } else {
                     return false;
@@ -42,7 +42,7 @@ public class Roi extends Piece
 
             if (x == deplacementX + 1 && y == deplacementY) {
 
-                if (p[a - 1][0] == null) {
+                if (p[a - 1][b] == null) {
                     return true;
                 } else {
                     return false;
@@ -51,7 +51,7 @@ public class Roi extends Piece
 
             if (y == deplacementY + 1 && x == deplacementX) {
 
-                if (p[0][b - 1] == null) {
+                if (p[a][b - 1] == null) {
 
                     return true;
                 } else {
@@ -62,7 +62,7 @@ public class Roi extends Piece
             if (y == deplacementY - 1 && x == deplacementX) {
 
 
-                if (p[0][b + 1] == null) {
+                if (p[a][b + 1] == null) {
                     return true;
                 } else {
                     return false;
@@ -138,4 +138,105 @@ public class Roi extends Piece
        		}
        		return false;
        	}
+
+       	public int[][] getAllDeplacements(Piece[][] p) {
+            int tabDeplacements[][] = new int[8][8];
+
+            int initX = super.getPosX();
+            int initY = super.getPosY();
+
+            for (int i =0; i<8; i++){
+                for (int j =0; j<8; j++){
+                    tabDeplacements[i][j]=0;
+                }
+            }
+
+            int x = initX;
+            int y = initY;
+
+            if(x+1<8){
+                if (p[x+1][y]==null){
+                    tabDeplacements[x+1][y] = 1;
+                } else {
+                    if (!(p[x+1][y].getCouleur()==super.getCouleur())) {
+                        tabDeplacements[x+1][y] = 1;
+                    }
+                }
+            }
+
+            if(x-1>=0){
+                if (p[x-1][y]==null){
+                    tabDeplacements[x-1][y] = 1;
+                } else {
+                    if (!(p[x-1][y].getCouleur()==super.getCouleur())) {
+                        tabDeplacements[x-1][y] = 1;
+                    }
+                }
+            }
+
+            if(y-1>=0){
+                if (p[x][y-1]==null){
+                    tabDeplacements[x][y-1] = 1;
+                } else {
+                    if (!(p[x][y-1].getCouleur()==super.getCouleur())) {
+                        tabDeplacements[x][y-1] = 1;
+                    }
+                }
+            }
+
+            if(y+1<8){
+                if (p[x][y+1]==null){
+                    tabDeplacements[x][y+1] = 1;
+                } else {
+                    if (!(p[x][y+1].getCouleur()==super.getCouleur())) {
+                        tabDeplacements[x][y+1] = 1;
+                    }
+                }
+            }
+
+            if(y-1>=0 && x-1>=0){
+                if (p[x-1][y-1]==null){
+                    tabDeplacements[x-1][y-1] = 1;
+                } else {
+                    if (!(p[x-1][y-1].getCouleur()==super.getCouleur())) {
+                        tabDeplacements[x-1][y-1] = 1;
+                    }
+                }
+            }
+
+            if(y+1<8 && x-1>=0){
+                if (p[x-1][y+1]==null){
+                    tabDeplacements[x-1][y+1] = 1;
+                } else {
+                    if (!(p[x-1][y+1].getCouleur()==super.getCouleur())) {
+                        tabDeplacements[x-1][y+1] = 1;
+                    }
+                }
+            }
+
+            if(y-1>=0 && x+1<8){
+                if (p[x+1][y-1]==null){
+                    tabDeplacements[x+1][y-1] = 1;
+                } else {
+                    if (!(p[x+1][y-1].getCouleur()==super.getCouleur())) {
+                        tabDeplacements[x+1][y-1] = 1;
+                    }
+                }
+            }
+
+            if(y+1<8 && x+1<8){
+                if (p[x+1][y+1]==null){
+                    tabDeplacements[x+1][y+1] = 1;
+                } else {
+                    if (!(p[x+1][y+1].getCouleur()==super.getCouleur())) {
+                        tabDeplacements[x+1][y+1] = 1;
+                    }
+                }
+            }
+
+            return tabDeplacements;
+
+
+        }
+
 }
