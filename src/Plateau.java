@@ -15,7 +15,7 @@ class Plateau extends JFrame{
 
   public void initPLateau(){
     JPanel pGrille = new JPanel(new GridLayout(8,8));
-    JButton but;
+    Bouton but;
 
     this.plateau = new Piece[8][8];
     this.plateau[0][0] = new Tour(0,0,"blanc");
@@ -37,7 +37,7 @@ class Plateau extends JFrame{
     for (int i = 0 ; i < 8 ; i++ ) {
       if (i == 1 ) {
         for ( int j = 0 ; j < 8 ; j++ ) {
-         // this.plateau[j][i] = new Pion(j,i,"blanc");
+         this.plateau[j][i] = new Pion(j,i,"blanc");
         }
       }
       if (i == 6 ) {
@@ -51,19 +51,19 @@ class Plateau extends JFrame{
         }
       }
     }
-    for (int i = 8 ; i < 8 ; i++) {
-      for (int j = 8 ; j < 8 ; j++) {
+    for (int i = 0 ; i < 8 ; i++) {
+      for (int j = 0 ; j < 8 ; j++) {
         if (i > 1 && i < 6) {
           JPanel pBut = new JPanel();
-          but = new JButton("-");
-          controlButton = new ControlButton(this, j,i);
+          but = new Bouton("-",i,j);
+          controlButton = new ControlButton(this);
           (but).addActionListener(controlButton);
           pBut.add(but);
           pGrille.add(pBut);
         }else {
           JPanel pBut = new JPanel();
-          but = new JButton((plateau[j][i]).getNom());
-          controlButton = new ControlButton(this, j,i);
+          but = new Bouton((plateau[j][i]).getNom(),i,j);
+          controlButton = new ControlButton(this);
           (but).addActionListener(controlButton);
           pBut.add(but);
           pGrille.add(pBut);

@@ -3,18 +3,19 @@ import java.awt.event.*;
 class ControlButton implements ActionListener{
 
     public Plateau p;
-    private int i;
-    private int j;
 
-    public ControlButton(Plateau p, int i , int j){
+    public ControlButton(Plateau p){
         this.p = p;
-        this.i = i;
-        this.j = j;
 
     }
 
     public void actionPerformed (ActionEvent e) {
-      System.out.println("i = " + i + " j = " + j);
+      Bouton but = (Bouton)e.getSource();
+      int i = but.getX();
+      int j = but.getY();
+      String nom = but.getNom();
+
+      System.out.println("i = " + i + " j = " + j + " nom = " +nom);
     }
 
 
