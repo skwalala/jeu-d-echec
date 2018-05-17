@@ -75,9 +75,24 @@ public class Jeu {
     }
 
 
-    public static void checkEchec(){
-	    
-    }
+   public boolean isEchec(Piece[][] p){
+	    for (int i=0; i<p.length; i++){
+	        for (int j=0; j<p.length; j++){
+                (if p[i][j].getNom().equals("R")){
+                    for (int k=0; k<p.length; k++){
+                        for (int l=0; l<p.length; l++){
+                            int[][] deplacements = p[k][l].getAllDeplacement(p);
+                            for (int o=0; o<deplacements.length; o++){
+                                for (int q=0; q<deplacements.length; q++){
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
 
 
     public static void main(String[] args) {
