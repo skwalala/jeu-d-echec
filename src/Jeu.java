@@ -1,8 +1,9 @@
 import java.util.*;
 public class Jeu {
     static final Scanner input = new Scanner(System.in);
-    public static int[] coordonnees = new int[4];
-
+    public static int[] coordonnees;
+    public static String camp = "";
+    public static Plateau p;
 
     public static int[] getCoordonnéePiece(String camp) {
         System.out.println(camp.concat(" c'est à vous, qu'elle pièce vous voulez déplacer ? "));
@@ -14,129 +15,118 @@ public class Jeu {
 
     public static int[] getCoordonnéeDeplacement() {
         System.out.println("Où voulez vous déplacer votre pièce ?");
-        int[] coordonneesDplacement = new int[2];
+        int[] coordonneesDeplacement = new int[2];
         coordonneesDeplacement[0] = coordonnees[2];
-        coordonneesDeplacement[ ] = coordonnees[3];
+        coordonneesDeplacement[1] = coordonnees[3];
         return coordonneesDeplacement;
     }
 
-    public static void verif(char[] possA, char[] possB, String camp, Piece[][] p) {
-        boolean pieceCorrect = false;
+    public static void verif() {
+        Piece[][] pieces = p.getPlateau();
         boolean deplacementCorrect = false;
-        int verification = 0;
-        char caractXPiece;
-        char caractYPiece;
         int xPiece = 0;
         int yPiece = 0;
-        while (!pieceCorrect) {
-            String pieceJoue = getCoordonnéePiece(camp);
-            if ((!pieceJoue.equals("")) && (!pieceJoue.equals(" "))){
-                caractXPiece = pieceJoue.charAt(0);
-                caractYPiece = pieceJoue.charAt(1);
-                for (int i = 0; i < possA.length; i++) {
-                    for (int j = 0; j < possB.length; j++) {
-                        if (((pieceJoue.length() == 2)) && (caractXPiece == possA[i]) && (caractYPiece == possB[j])){
-                            xPiece = i;
-                            yPiece = j;
-                            //System.out.println("xPiece = "+xPiece+" yPiece = "+yPiece);
-                            if (p[xPiece][yPiece] != null) {
-                                if (p[xPiece][yPiece].getCouleur().equals(camp)) {
-                                    System.out.println(p[xPiece][yPiece].getNom());
-				    printAllDeplacement(p,xPiece,yPiece);
-                                    verification = 1;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if (verification == 1) {
-                pieceCorrect = true;
-            } else {
-                System.out.println("Erreur : veuillez entrer une pièce se situant entre A1 et H8 et de votre camp.");
+        int[] pieceJoue = getCoordonnéePiece(Jeu.camp);
+        xPiece = pieceJoue[0];
+        yPiece = pieceJoue[1];
+        if (pieces[xPiece][yPiece] != null) {
+            if (pieces[xPiece][yPiece].getCouleur().equals(Jeu.camp)) {
+                System.out.println(pieces[xPiece][yPiece].getNom());
+                printAllDeplacement(pieces, xPiece, yPiece);
             }
         }
         while (!deplacementCorrect) {
-            String deplacementJoue = getCoordonnéeDeplacement();
-            char caractNewXPiece = deplacementJoue.charAt(0);
-            char caractNewYPiece = deplacementJoue.charAt(1);
-            int newXPiece = 0;
-            int newYPiece = 0;
-            //System.out.println(xPiece + " " + yPiece);
-            for (int i = 0; i < possA.length; i++) {
-                if (possA[i] == caractNewXPiece) {
-                    newXPiece = i;
-                    newYPiece = Character.getNumericValue(caractNewYPiece)-1;
-                }
-            }
-            //System.out.println(newXPiece + " " + newYPiece);
-            if (!p[xPiece][yPiece].seDeplace(p, newXPiece, newYPiece)) {
+            int[] deplacementJoue = getCoordonnéeDeplacement();
+            int newXPiece = deplacementJoue[0];
+            int newYPiece = deplacementJoue[1] - 1;
+            if (!pieces[xPiece][yPiece].seDeplace(pieces, newXPiece, newYPiece)) {
                 System.out.println("Erreur : veuillez choisir un autre emplacement.");
             } else {
-                p[newXPiece][newYPiece] = p[xPiece][yPiece];
-                p[xPiece][yPiece] = null;
+                pieces[newXPiece][newYPiece] = pieces[xPiece][yPiece];
+                pieces[xPiece][yPiece] = null;
                 deplacementCorrect = true;
-		p[newXPiece][newYPiece].setPosX(newXPiece);
-		p[newXPiece][newYPiece].setPosY(newYPiece);
+                pieces[newXPiece][newYPiece].setPosX(newXPiece);
+                pieces[newXPiece][newYPiece].setPosY(newYPiece);
             }
         }
     }
 
 
-   /*public boolean isEchec(Piece[][] p){
-	    for (int i=0; i<p.length; i++){
-	        for (int j=0; j<p.length; j++){
-                (if p[i][j].getNom().equals("R")){
-                    for (int k=0; k<p.length; k++){
-                        for (int l=0; l<p.length; l++){
-                            int[][] deplacements = p[k][l].getAllDeplacement(p);
-                            for (int o=0; o<deplacements.length; o++){
-                                for (int q=0; q<deplacements.length; q++){
+    public boolean isEchec(Piece[][] p, String camp) {
+        int[] posRoi = getPosRoi(p, camp);
+        for (int i = 0; i < p.length; i++) {
+            for (int j = 0; j < p.length; j++) {
+                int[][] deplacements = p[i][j].getAllDeplacement(p);
+                if (deplacements[posRoi[0]][posRoi[1]] == 1){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-                                }
-                            }
-                        }
+    public boolean isCheckMat(Piece[][] p, String camp){
+        int[] posRoi = getPosRoi(p, camp);
+        if (isEchec(p, camp)){
+           int[][] getAllDeplacementCouleur = new int[8][8]; // new int[8][8] remplacé par getAllDeplacementCouleur
+            for (int i=posRoi[0]-1; i<posRoi[0]+1; i++){
+                for (int j=posRoi[1]-1; j<posRoi[1]+1;){
+                    if (getAllDeplacementCouleur[i][j] == 0){
+                        return false;
                     }
                 }
             }
-        }*/
-    
+            return true;
+        }
+        return false;
+    }
 
+    public int[] getPosRoi(Piece[][] p, String camp) {
+        for (int i = 0; i < p.length; i++) {
+            for (int j = 0; j < p.length; j++) {
+                if (p[i][j].getNom().equals("R") && p[i][j].getCouleur().equals(camp)) {
+                    return new int[]{i,j};
+                }
+            }
+        }
+        return null;
+    }
+
+    public static void printAllDeplacement(Piece[][] piece, int x, int y) {
+        if (piece[x][y] != null) {
+            int[][] deplacement = piece[x][y].getAllDeplacement(piece);
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    System.out.print(deplacement[j][i]);
+                    System.out.print(" ");
+                }
+                System.out.println("");
+            }
+            System.out.println(piece[x][y].getNom());
+        }
+
+    }
 
     public static void main(String[] args) {
-        for(int k = 0; k < 4; k++){
-            coordonnees[k] = 9;
+        p = new Plateau();
+        coordonnees = new int[4];
+        for(int i = 0; i < 4; i++){
+            coordonnees[i] = 9;
         }
-    	Plateau p = new Plateau();
-    	String camp = "";
-    	boolean partieFinie = false;
-    	char[] possA = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
-    	char[] possB = {'1', '2', '3', '4', '5', '6', '7','8'};
-    	while (!partieFinie) {
-    	    p.affichePlateau();
-	    camp = "blanc";
-	    verif(possA, possB, camp,p.getPlateau());
-	    //System.out.print("\033\143");
-	    p.affichePlateau();
-	    camp = "noir";
-	    verif(possA, possB, camp,p.getPlateau());
-	    //System.out.print("\033\143");
+        p.affichePlateau();
+        boolean partieFinie = false;
+        /*while (!partieFinie) {
+            p.affichePlateau();
+            camp = "blanc";
+            verif(camp, p.getPlateau());
+            //System.out.print("\033\143");
+            p.affichePlateau();
+            camp = "noir";
+            verif(camp, p.getPlateau());
+            //System.out.print("\033\143");
 
 
-    	}
-    }
-    public static void printAllDeplacement(Piece[][] piece, int x, int y){
-	    if(piece[x][y]!=null){
-	    int[][] deplacement = piece[x][y].getAllDeplacement(piece);
-	    for (int i=0; i<8; i++){
-	    	for (int j=0;j<8; j++){
-			System.out.print(deplacement[j][i]);
-			System.out.print(" ");
-		}
-		System.out.println("");
-	    }
-	    System.out.println(piece[x][y].getNom());
-	    }
-	
+        }*/
     }
 }
+

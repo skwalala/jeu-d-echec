@@ -51,18 +51,20 @@ class Plateau extends JFrame{
         }
       }
     }
+    controlButton = new ControlButton(this);
     for (int i = 0 ; i < 8 ; i++) {
       for (int j = 0 ; j < 8 ; j++) {
         if (i > 1 && i < 6) {
           JPanel pBut = new JPanel();
           but = new Bouton("-",i,j);
-          controlButton = new ControlButton(this);
+          but.setPreferredSize(new Dimension(100,100));
           (but).addActionListener(controlButton);
           pBut.add(but);
           pGrille.add(pBut);
         }else {
           JPanel pBut = new JPanel();
           but = new Bouton((plateau[j][i]).getNom(),i,j);
+          but.setPreferredSize(new Dimension(100,100));
           controlButton = new ControlButton(this);
           (but).addActionListener(controlButton);
           pBut.add(but);
