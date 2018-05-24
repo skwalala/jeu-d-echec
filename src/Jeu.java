@@ -1,15 +1,23 @@
 import java.util.*;
 public class Jeu {
     static final Scanner input = new Scanner(System.in);
+    public static int[] coordonnees = new int[4];
 
-    public static String getCoordonnéePiece(String camp) {
+
+    public static int[] getCoordonnéePiece(String camp) {
         System.out.println(camp.concat(" c'est à vous, qu'elle pièce vous voulez déplacer ? "));
-        return input.nextLine();
+        int[] coordonneesPiece = new int[2];
+        coordonneesPiece[0] = coordonnees[0];
+        coordonneesPiece[1] = coordonnees[1];
+        return coordonneesPiece;
     }
 
-    public static String getCoordonnéeDeplacement() {
+    public static int[] getCoordonnéeDeplacement() {
         System.out.println("Où voulez vous déplacer votre pièce ?");
-        return input.nextLine();
+        int[] coordonneesDplacement = new int[2];
+        coordonneesDeplacement[0] = coordonnees[2];
+        coordonneesDeplacement[ ] = coordonnees[3];
+        return coordonneesDeplacement;
     }
 
     public static void verif(char[] possA, char[] possB, String camp, Piece[][] p) {
@@ -75,7 +83,7 @@ public class Jeu {
     }
 
 
-   public boolean isEchec(Piece[][] p){
+   /*public boolean isEchec(Piece[][] p){
 	    for (int i=0; i<p.length; i++){
 	        for (int j=0; j<p.length; j++){
                 (if p[i][j].getNom().equals("R")){
@@ -91,11 +99,14 @@ public class Jeu {
                     }
                 }
             }
-        }
+        }*/
     
 
 
     public static void main(String[] args) {
+        for(int k = 0; k < 4; k++){
+            coordonnees[k] = 9;
+        }
     	Plateau p = new Plateau();
     	String camp = "";
     	boolean partieFinie = false;
