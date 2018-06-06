@@ -1,5 +1,6 @@
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 class ControlButton implements ActionListener{
 
     public Plateau p;
@@ -28,6 +29,10 @@ class ControlButton implements ActionListener{
           Jeu.coordonnees[2] = i;
           Jeu.coordonnees[3] = j;
           Jeu.verif();
+          Piece[][]piece = p.getPlateau();
+          if(piece[Jeu.getxPiece()][Jeu.getyPiece()] != null) {
+              System.out.println(piece[Jeu.getxPiece()][Jeu.getyPiece()].getNom());
+          }
 
           for(int l = 0; l < 4; l++ ){
               System.out.println(Jeu.coordonnees[l]);

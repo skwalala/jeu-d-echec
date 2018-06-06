@@ -4,9 +4,12 @@ public class Jeu {
     public static int[] coordonnees;
     public static String camp = "";
     public static Plateau p;
+    private static int xPiece;
+    private static int yPiece;
+    private static int newXPiece;
+    private static int newYPiece;
 
-    public static int[] getCoordonnéePiece(String camp) {
-        System.out.println(camp.concat(" c'est à vous, qu'elle pièce vous voulez déplacer ? "));
+    public static int[] getCoordonnéePiece() {
         int[] coordonneesPiece = new int[2];
         coordonneesPiece[0] = coordonnees[0];
         coordonneesPiece[1] = coordonnees[1];
@@ -14,7 +17,6 @@ public class Jeu {
     }
 
     public static int[] getCoordonnéeDeplacement() {
-        System.out.println("Où voulez vous déplacer votre pièce ?");
         int[] coordonneesDeplacement = new int[2];
         coordonneesDeplacement[0] = coordonnees[2];
         coordonneesDeplacement[1] = coordonnees[3];
@@ -23,32 +25,36 @@ public class Jeu {
 
     public static void verif() {
         Piece[][] pieces = p.getPlateau();
-        boolean deplacementCorrect = false;
-        int xPiece = 0;
-        int yPiece = 0;
-        int[] pieceJoue = getCoordonnéePiece(Jeu.camp);
-        xPiece = pieceJoue[0];
-        yPiece = pieceJoue[1];
-        if (pieces[xPiece][yPiece] != null) {
-            if (pieces[xPiece][yPiece].getCouleur().equals(Jeu.camp)) {
+        int[] pieceJoue = getCoordonnéePiece();
+        if (pieces[pieceJoue[1]][pieceJoue[0]] != null) {
+            if (pieces[pieceJoue[1]][pieceJoue[0]].getCouleur().equals(camp)) {
+                xPiece = pieceJoue[1];
+                yPiece = pieceJoue[0];
                 System.out.println(pieces[xPiece][yPiece].getNom());
                 printAllDeplacement(pieces, xPiece, yPiece);
+
+                int[] deplacementJoue = getCoordonnéeDeplacement();
+                newXPiece = deplacementJoue[1];
+                newYPiece = deplacementJoue[0];
+                if (!pieces[xPiece][yPiece].seDeplace(pieces, newXPiece, newYPiece)) {
+                    System.out.println("Erreur : veuillez choisir un autre emplacement.");
+                    deplacementJoue = null;
+                } else {
+                    pieces[newXPiece][newYPiece] = pieces[xPiece][yPiece];
+                    pieces[xPiece][yPiece] = null;
+                    pieces[newXPiece][newYPiece].setPosX(newXPiece);
+                    pieces[newXPiece][newYPiece].setPosY(newYPiece);
+                    if (camp.equals("noir")){
+                        camp = "blanc";
+                    } else{
+                        camp = "noir";
+                    }
+                }
+            }else{
+                System.out.println("Erreur : veulliez choisir une autre piece.");
             }
         }
-        while (!deplacementCorrect) {
-            int[] deplacementJoue = getCoordonnéeDeplacement();
-            int newXPiece = deplacementJoue[0];
-            int newYPiece = deplacementJoue[1] - 1;
-            if (!pieces[xPiece][yPiece].seDeplace(pieces, newXPiece, newYPiece)) {
-                System.out.println("Erreur : veuillez choisir un autre emplacement.");
-            } else {
-                pieces[newXPiece][newYPiece] = pieces[xPiece][yPiece];
-                pieces[xPiece][yPiece] = null;
-                deplacementCorrect = true;
-                pieces[newXPiece][newYPiece].setPosX(newXPiece);
-                pieces[newXPiece][newYPiece].setPosY(newYPiece);
-            }
-        }
+
     }
 
 
@@ -107,26 +113,31 @@ public class Jeu {
 
     }
 
+    public static int getxPiece() {
+        return xPiece;
+    }
+
+    public static int getyPiece() {
+        return yPiece;
+    }
+
+    public static int getNewXPiece() {
+        return newXPiece;
+    }
+
+    public static int getNewYPiece() {
+        return newYPiece;
+    }
+
+
     public static void main(String[] args) {
         p = new Plateau();
+        camp = "blanc";
         coordonnees = new int[4];
         for(int i = 0; i < 4; i++){
             coordonnees[i] = 9;
         }
         p.affichePlateau();
-        boolean partieFinie = false;
-        /*while (!partieFinie) {
-            p.affichePlateau();
-            camp = "blanc";
-            verif(camp, p.getPlateau());
-            //System.out.print("\033\143");
-            p.affichePlateau();
-            camp = "noir";
-            verif(camp, p.getPlateau());
-            //System.out.print("\033\143");
-
-
-        }*/
     }
 }
 
