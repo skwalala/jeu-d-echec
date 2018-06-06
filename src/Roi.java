@@ -128,7 +128,7 @@ public class Roi extends Piece
         public boolean seDeplace(Piece[][] p, int x, int y) {
        		if (estValide(x,y,p)){
        			if (!(p[x][y]==null)) {
-       				if (!(p[x][y].getCouleur()==super.getCouleur())) {
+       				if (!(p[x][y].getCouleur().equals(super.getCouleur()))) {
        					return true;
        				} else return false;
        			} else {
