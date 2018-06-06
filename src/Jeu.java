@@ -28,37 +28,41 @@ public class Jeu {
         int[] pieceJoue = getCoordonnéePiece();
         if (pieces[pieceJoue[1]][pieceJoue[0]] != null) {
             if (pieces[pieceJoue[1]][pieceJoue[0]].getCouleur().equals(camp)) {
-                xPiece = pieceJoue[1];
-                yPiece = pieceJoue[0];
-                System.out.println(pieces[xPiece][yPiece].getNom());
-                printAllDeplacement(pieces, xPiece, yPiece);
+                if ((isEchec(pieces, camp)) && (!pieces[pieceJoue[1]][pieceJoue[0]].getNom().equals("R"))){
+                    System.out.println("Roi est en echec, veuillez deplacer le roi.");
+                }else{
+                    xPiece = pieceJoue[1];
+                    yPiece = pieceJoue[0];
+                    System.out.println(pieces[xPiece][yPiece].getNom());
+                    printAllDeplacement(pieces, xPiece, yPiece);
 
-                int[] deplacementJoue = getCoordonnéeDeplacement();
-                newXPiece = deplacementJoue[1];
-                newYPiece = deplacementJoue[0];
-                if (!pieces[xPiece][yPiece].seDeplace(pieces, newXPiece, newYPiece)) {
-                    System.out.println("Erreur : veuillez choisir un autre emplacement.");
-                    deplacementJoue = null;
-                } else {
-                    pieces[newXPiece][newYPiece] = pieces[xPiece][yPiece];
-                    pieces[xPiece][yPiece] = null;
-                    pieces[newXPiece][newYPiece].setPosX(newXPiece);
-                    pieces[newXPiece][newYPiece].setPosY(newYPiece);
-                    if (camp.equals("noir")){
-                        camp = "blanc";
-                    } else{
-                        camp = "noir";
+                    int[] deplacementJoue = getCoordonnéeDeplacement();
+                    newXPiece = deplacementJoue[1];
+                    newYPiece = deplacementJoue[0];
+                    if (!pieces[xPiece][yPiece].seDeplace(pieces, newXPiece, newYPiece)) {
+                        System.out.println("Erreur : veuillez choisir un autre emplacement.");
+                        deplacementJoue = null;
+                    } else {
+                        pieces[newXPiece][newYPiece] = pieces[xPiece][yPiece];
+                        pieces[xPiece][yPiece] = null;
+                        pieces[newXPiece][newYPiece].setPosX(newXPiece);
+                        pieces[newXPiece][newYPiece].setPosY(newYPiece);
+                        if (camp.equals("noir")) {
+                            camp = "blanc";
+                        } else {
+                            camp = "noir";
+                        }
                     }
                 }
             }else{
                 System.out.println("Erreur : veulliez choisir une autre piece.");
             }
         }
-
+        p.affichePlateau();
     }
 
 
-    public boolean isEchec(Piece[][] p, String camp) {
+    public static boolean isEchec(Piece[][] p, String camp) {
         int[] posRoi = getPosRoi(p, camp);
         for (int i = 0; i < p.length; i++) {
             for (int j = 0; j < p.length; j++) {
@@ -87,7 +91,7 @@ public class Jeu {
         return false;
     }
 
-    public int[] getPosRoi(Piece[][] p, String camp) {
+    public static int[] getPosRoi(Piece[][] p, String camp) {
         for (int i = 0; i < p.length; i++) {
             for (int j = 0; j < p.length; j++) {
                 if (p[i][j].getNom().equals("R") && p[i][j].getCouleur().equals(camp)) {
