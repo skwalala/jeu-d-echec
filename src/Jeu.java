@@ -47,6 +47,7 @@ public class Jeu {
                         pieces[xPiece][yPiece] = null;
                         pieces[newXPiece][newYPiece].setPosX(newXPiece);
                         pieces[newXPiece][newYPiece].setPosY(newYPiece);
+                        changePion(pieces);
                         if (camp.equals("noir")) {
                             camp = "blanc";
                         } else {
@@ -61,14 +62,30 @@ public class Jeu {
         p.affichePlateau();
     }
 
+    public static void changePion(Piece[][] pieces) {
+        if (pieces[newXPiece][newYPiece].getNom().equals("P")){
+            if (camp.equals("blanc")){
+                if (newYPiece == 7){
+                    pieces[newXPiece][newYPiece] = new Dame(newXPiece, newYPiece, "blanc");
+                }
+            }else{
+                if (newYPiece == 0){
+                    pieces[newXPiece][newYPiece] = new Dame(newXPiece, newYPiece, "noir");
+                }
+            }
+        }
+    }
+
 
     public static boolean isEchec(Piece[][] p, String camp) {
         int[] posRoi = getPosRoi(p, camp);
         for (int i = 0; i < p.length; i++) {
             for (int j = 0; j < p.length; j++) {
-                int[][] deplacements = p[i][j].getAllDeplacement(p);
-                if (deplacements[posRoi[0]][posRoi[1]] == 1){
-                    return true;
+                if (p[i][j] != null) {
+                    int[][] deplacements = p[i][j].getAllDeplacement(p);
+                    if (deplacements[posRoi[0]][posRoi[1]] == 1) {
+                        return true;
+                    }
                 }
             }
         }
@@ -94,7 +111,7 @@ public class Jeu {
     public static int[] getPosRoi(Piece[][] p, String camp) {
         for (int i = 0; i < p.length; i++) {
             for (int j = 0; j < p.length; j++) {
-                if (p[i][j].getNom().equals("R") && p[i][j].getCouleur().equals(camp)) {
+                if (p[i][j] != null && p[i][j].getNom().equals("R") && p[i][j].getCouleur().equals(camp)) {
                     return new int[]{i,j};
                 }
             }
