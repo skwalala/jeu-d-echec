@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.*;
 
 public class Roi extends Piece
 {
@@ -31,7 +32,14 @@ public class Roi extends Piece
             diffX = Math.abs(diffX);
             diffY = Math.abs(diffY);
 
-            if (x == deplacementX - 1 && y == deplacementY) {
+	    if (Math.abs(diffX)<=1 && Math.abs(diffY)<=1){
+	    	return true;
+		}
+		else{
+		return false;
+		}
+
+/*            if (x == deplacementX - 1 && y == deplacementY) {
 
                 if (p[a + 1][b] == null) {
                     return true;
@@ -105,7 +113,7 @@ public class Roi extends Piece
                 }
             }
 
-            return false;
+            return false;*/
 
         }
 
