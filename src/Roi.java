@@ -35,86 +35,7 @@ public class Roi extends Piece
 	    if (Math.abs(diffX)<=1 && Math.abs(diffY)<=1){
 	    	return true;
 		}
-		else{
 		return false;
-		}
-
-/*            if (x == deplacementX - 1 && y == deplacementY) {
-
-                if (p[a + 1][b] == null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if (x == deplacementX + 1 && y == deplacementY) {
-
-                if (p[a - 1][b] == null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if (y == deplacementY + 1 && x == deplacementX) {
-
-                if (p[a][b - 1] == null) {
-
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if (y == deplacementY - 1 && x == deplacementX) {
-
-
-                if (p[a][b + 1] == null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if (y == deplacementY - 1 && x == deplacementX - 1) {
-
-                if (p[a + 1][b + 1] == null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if (y == deplacementY + 1 && x == deplacementX + 1) {
-
-                if (p[a - 1][b - 1] == null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if (y == deplacementY + 1 && x == deplacementX - 1) {
-
-                if (p[a + 1][b - 1] == null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if (y == deplacementY - 1 && x == deplacementX + 1) {
-
-                if (p[a - 1][b + 1] == null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            return false;*/
-
         }
 
         public String getNom()
@@ -142,7 +63,6 @@ public class Roi extends Piece
        			} else {
        				return true;
        			}
-       		} else if (estValide(x,y,p)==false){
        		}
        		return false;
        	}
