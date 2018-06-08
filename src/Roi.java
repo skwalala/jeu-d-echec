@@ -3,7 +3,7 @@ import java.lang.*;
 
 public class Roi extends Piece
 {
-
+        boolean dejaDeplace = false;
 
         // Constructeur tour
 
@@ -58,12 +58,33 @@ public class Roi extends Piece
        		if (estValide(x,y,p)){
        			if (!(p[x][y]==null)) {
        				if (!(p[x][y].getCouleur().equals(super.getCouleur()))) {
+       				    dejaDeplace=true;
        					return true;
        				} else return false;
        			} else {
+       			    dejaDeplace=true
        				return true;
        			}
        		}
+       		if (isRoquePossible(x,y,p)){
+       		    plateau.roque(this,x,y);
+       		    return true;
+            }
        		return false;
        	}
+
+       	public boolean isRoquePossible(int x, int y, Piece[][] p){
+            if (dejaDeplace) return false;
+            if (j>getPosX()){
+                for (i=getPosX(); i>j; i++){
+                    if (p[x][i]!=null) return false;
+                }
+            }
+            if (j<getPosX()){
+                for (i=getPosX(); i<j; i--){
+                    if (p[x][i]!=null) return false;
+                }
+            }
+            return true;
+        }
 }

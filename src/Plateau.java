@@ -96,6 +96,29 @@ class Plateau extends JFrame{
 	return false;
   }
 
+  public void roque(Piece roi, int x, int y){
+    if (this.plateau[x][y]instanceof Tour) {
+      this.remove(roi);
+      this.remove(this.plateau[x][y]);
+      if (y == 0 && x == 0) {
+        this.plateau[2][0] = new Roi(2, 0, "blanc");
+        this.plateau[3][0] = new Tout(3, 0, "blanc");
+      }
+      if (y == 7 && x == 0) {
+        this.plateau[6][0] = new Roi(6, 0, "blanc");
+        this.plateau[5][0] = new Tout(5, 0, "blanc");
+      }
+      if (y == 0 && x == 7) {
+        this.plateau[2][7] = new Roi(2, 7, "noir");
+        this.plateau[3][7] = new Tout(3, 7, "noir");
+      }
+      if (y == 7 && x == 7) {
+        this.plateau[6][7] = new Roi(6, 7, "noir");
+        this.plateau[5][7] = new Tout(5, 7, "noir");
+      }
+    }
+  }
+
   public Piece[][] getPlateau(){
 	return this.plateau;
   }
