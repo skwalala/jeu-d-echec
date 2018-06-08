@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.*;
 
 public class Roi extends Piece
 {
@@ -31,82 +32,10 @@ public class Roi extends Piece
             diffX = Math.abs(diffX);
             diffY = Math.abs(diffY);
 
-            if (x == deplacementX - 1 && y == deplacementY) {
-
-                if (p[a + 1][b] == null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if (x == deplacementX + 1 && y == deplacementY) {
-
-                if (p[a - 1][b] == null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if (y == deplacementY + 1 && x == deplacementX) {
-
-                if (p[a][b - 1] == null) {
-
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if (y == deplacementY - 1 && x == deplacementX) {
-
-
-                if (p[a][b + 1] == null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if (y == deplacementY - 1 && x == deplacementX - 1) {
-
-                if (p[a + 1][b + 1] == null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if (y == deplacementY + 1 && x == deplacementX + 1) {
-
-                if (p[a - 1][b - 1] == null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if (y == deplacementY + 1 && x == deplacementX - 1) {
-
-                if (p[a + 1][b - 1] == null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if (y == deplacementY - 1 && x == deplacementX + 1) {
-
-                if (p[a - 1][b + 1] == null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            return false;
-
+	    if (Math.abs(diffX)<=1 && Math.abs(diffY)<=1){
+	    	return true;
+		}
+		return false;
         }
 
         public String getNom()
@@ -128,13 +57,12 @@ public class Roi extends Piece
         public boolean seDeplace(Piece[][] p, int x, int y) {
        		if (estValide(x,y,p)){
        			if (!(p[x][y]==null)) {
-       				if (!(p[x][y].getCouleur()==super.getCouleur())) {
+       				if (!(p[x][y].getCouleur().equals(super.getCouleur()))) {
        					return true;
        				} else return false;
        			} else {
        				return true;
        			}
-       		} else if (estValide(x,y,p)==false){
        		}
        		return false;
        	}

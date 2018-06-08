@@ -5,6 +5,8 @@ import javax.swing.*;
 class Plateau extends JFrame{
   private Piece plateau[][];
   public ControlButton controlButton;
+  private JPanel pGrille;
+  private JPanel pAffiche;
 
   public Plateau(){
     initPLateau();
@@ -14,8 +16,10 @@ class Plateau extends JFrame{
   }
 
   public void initPLateau(){
-    JPanel pGrille = new JPanel(new GridLayout(8,8));
-    Bouton but;
+
+    pGrille = new JPanel(new GridLayout(8,8));
+    controlButton = new ControlButton(this);
+    pAffiche = new JPanel();
 
     this.plateau = new Piece[8][8];
     this.plateau[0][0] = new Tour(0,0,"blanc");
@@ -51,35 +55,10 @@ class Plateau extends JFrame{
         }
       }
     }
-    controlButton = new ControlButton(this);
-    for (int i = 0 ; i < 8 ; i++) {
-      for (int j = 0 ; j < 8 ; j++) {
-        if (i > 1 && i < 6) {
-          JPanel pBut = new JPanel();
-          but = new Bouton("-",i,j);
-          but.setPreferredSize(new Dimension(100,100));
-          (but).addActionListener(controlButton);
-          pBut.add(but);
-          pGrille.add(pBut);
-        }else {
-          JPanel pBut = new JPanel();
-          but = new Bouton((plateau[j][i]).getNom(),i,j);
-          but.setPreferredSize(new Dimension(100,100));
-          controlButton = new ControlButton(this);
-          (but).addActionListener(controlButton);
-          pBut.add(but);
-          pGrille.add(pBut);
-        }
-      }
-    }
-    JPanel pAffiche = new JPanel();
-    pAffiche.setLayout(new BoxLayout(pAffiche, BoxLayout.X_AXIS));
-    pAffiche.add(pGrille);
-    pAffiche.setBorder(BorderFactory.createEmptyBorder(30,30,30,30));
-    setContentPane(pAffiche);
-
-
+    display();
   }
+
+
 
   public void affichePlateau(){
     System.out.println("    A   B   C   D   E   F   G   H");
@@ -119,5 +98,29 @@ class Plateau extends JFrame{
 
   public Piece[][] getPlateau(){
 	return this.plateau;
+  }
+  
+  public void display(){
+    pAffiche.removeAll();
+    pGrille.removeAll();
+    Bouton but;
+    for (int i = 0 ; i < 8 ; i++) {
+      for (int j = 0 ; j < 8 ; j++) {
+        JPanel pBut = new JPanel();
+	  if (plateau[j][i]!=null) {
+          but = new Bouton((plateau[j][i]).getNom(),i,j);
+	}else{
+          but = new Bouton("-",i,j);
+	}
+        but.setPreferredSize(new Dimension(100,100));
+        but.addActionListener(controlButton);
+        pBut.add(but);
+        pGrille.add(pBut);
+      }
+    }
+    this.pAffiche.setLayout(new BoxLayout(this.pAffiche, BoxLayout.X_AXIS));
+    this.pAffiche.add(pGrille);
+    this.pAffiche.setBorder(BorderFactory.createEmptyBorder(30,30,30,30));
+    setContentPane(this.pAffiche);
   }
 }
