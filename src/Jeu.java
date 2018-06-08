@@ -1,5 +1,7 @@
+import javax.swing.*;
+import java.awt.*;
 import java.util.*;
-public class Jeu {
+public class Jeu extends Component {
     static final Scanner input = new Scanner(System.in);
     public static int[] coordonnees;
     public static String camp = "";
@@ -60,19 +62,44 @@ public class Jeu {
             }
         }
         p.affichePlateau();
-	p.display();
+        p.display();
     }
 
     public static void changePion(Piece[][] pieces) {
         if (pieces[newXPiece][newYPiece].getNom().equals("P")){
             if (camp.equals("blanc")){
                 if (newYPiece == 7){
-                    pieces[newXPiece][newYPiece] = new Dame(newXPiece, newYPiece, "blanc");
+                    switch (showChange()){
+                        case 0:
+                            pieces[newXPiece][newYPiece] = new Dame(newXPiece, newYPiece, "blanc");
+                            break;
+                        case 1:
+                            pieces[newXPiece][newYPiece] = new Fou(newXPiece, newYPiece, "blanc");
+                            break;
+                        case 2:
+                            pieces[newXPiece][newYPiece] = new Cavalier(newXPiece, newYPiece, "blanc");
+                            break;
+                        case 3:
+                            pieces[newXPiece][newYPiece] = new Tour(newXPiece, newYPiece, "blanc");
+                            break;
+                    }
                 }
             }else{
                 if (newYPiece == 0){
-                    pieces[newXPiece][newYPiece] = new Dame(newXPiece, newYPiece, "noir");
-                }
+                    switch (showChange()){
+                        case 0:
+                            pieces[newXPiece][newYPiece] = new Dame(newXPiece, newYPiece, "noir");
+                            break;
+                        case 1:
+                            pieces[newXPiece][newYPiece] = new Fou(newXPiece, newYPiece, "noir");
+                            break;
+                        case 2:
+                            pieces[newXPiece][newYPiece] = new Cavalier(newXPiece, newYPiece, "noir");
+                            break;
+                        case 3:
+                            pieces[newXPiece][newYPiece] = new Tour(newXPiece, newYPiece, "noir");
+                            break;
+                    }                }
             }
         }
     }
@@ -96,7 +123,7 @@ public class Jeu {
     public boolean isCheckMat(Piece[][] p, String camp){
         int[] posRoi = getPosRoi(p, camp);
         if (isEchec(p, camp)){
-           int[][] getAllDeplacementCouleur = new int[8][8]; // new int[8][8] remplacé par getAllDeplacementCouleur
+            int[][] getAllDeplacementCouleur = new int[8][8]; // new int[8][8] remplacé par getAllDeplacementCouleur
             for (int i=posRoi[0]-1; i<posRoi[0]+1; i++){
                 for (int j=posRoi[1]-1; j<posRoi[1]+1;){
                     if (getAllDeplacementCouleur[i][j] == 0){
@@ -149,6 +176,24 @@ public class Jeu {
 
     public static int getNewYPiece() {
         return newYPiece;
+    }
+
+    public static int showChange(){
+        Object[] options = {"Dame",
+                "Fou",
+                "Cavalier",
+                "Tour"};
+
+        int n = JOptionPane.showOptionDialog(p,
+                "Que voulez vous faire ?",
+                "Je veux qu'il devienne : ",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[3]);
+
+        return n;
     }
 
 
