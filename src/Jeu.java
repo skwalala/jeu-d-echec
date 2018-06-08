@@ -60,6 +60,7 @@ public class Jeu {
             }
         }
         p.affichePlateau();
+	p.display();
     }
 
     public static void changePion(Piece[][] pieces) {
