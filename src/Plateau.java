@@ -157,19 +157,15 @@ class Plateau extends JFrame{
   	int cindex;
 	int tindex=0;
 	String[] type={"P","T","C","F","D","R"};
-	System.out.print(couleur);
 	if ("blanc".equals(couleur)){
 		cindex=0;
-		System.out.println(0);
 	}else{
 		cindex=1;
-		System.out.println(1);
 	}
 
 	while (!type[tindex].equals(nom)){
 		tindex++;
 	}
-	System.out.println("indexes:"+cindex+tindex);
 	return image[cindex][tindex];
   }
 
@@ -181,7 +177,6 @@ class Plateau extends JFrame{
         for(int j=0; j<color.length; j++) {
         	for(int i=0; i<type.length; i++) {
 	            tempList2ImageIcon[i]=createImageIcon("img/" + type[i] + color[j] + ".png",""+type[i]+color[j]);
-		    System.out.println("img/" + type[i] + color[j] + ".png");
 		}
 		tempListImageIcon[j]=Arrays.copyOf(tempList2ImageIcon,tempList2ImageIcon.length);
 		System.out.println(j);

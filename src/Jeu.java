@@ -30,7 +30,7 @@ public class Jeu extends Component {
         int[] pieceJoue = getCoordonnéePiece();
         if (pieces[pieceJoue[1]][pieceJoue[0]] != null) {
             if (pieces[pieceJoue[1]][pieceJoue[0]].getCouleur().equals(camp)) {
-                if ((isEchec(pieces, camp)) && (!pieces[pieceJoue[1]][pieceJoue[0]].getNom().equals("R"))){
+                if (1==2 && (isEchec(pieces, camp)) && (!pieces[pieceJoue[1]][pieceJoue[0]].getNom().equals("R"))){
                     System.out.println("Roi est en echec, veuillez deplacer le roi.");
                 }else{
                     xPiece = pieceJoue[1];

@@ -28,9 +28,52 @@ public class Tour extends Piece
             int b = y;
             int diffX = deplacementX - x;
             int diffY = deplacementY - y;
-            diffX = Math.abs(diffX);
-            diffY = Math.abs(diffY);
 
+	    if (diffX!=0 && diffY!=0){
+	    	return false;
+	    }
+
+	    if (diffX<0 || diffY==0){
+	    	for (int i=x-1; i>deplacementX; i--){
+			if (p[y][i]!=null){
+				return false;
+			}
+		}
+	    	return true;
+	    }
+
+	    if (diffX>0 || diffY==0){
+	    	for (int i=x-1; i<deplacementX; i++){
+			if (p[y][i]!=null){
+				return false;
+			}
+		}
+	    	return true;
+	    }
+
+	
+	    if (diffY<0 || diffX==0){
+	    	for (int i=y-1; i>deplacementY; i--){
+			if (p[i][x]!=null){
+				return false;
+			}
+		}
+	    	return true;
+	    }
+
+	
+	    if (diffY>0 || diffX==0){
+	    	for (int i=y; i<deplacementY; i++){
+			if (p[i][x]!=null){
+				return false;
+			}
+		}
+	    	return true;
+	    }
+
+	
+	    return false;
+/*
             if (((y == deplacementY) && (x < deplacementX))) {
                 for (int i = 0; i < diffX; i++) {
                     if (p[a + 1][b] == null) {
@@ -86,7 +129,7 @@ public class Tour extends Piece
                 }
             }
 
-             return false;
+             return false;*/
         }
 
 
