@@ -62,17 +62,17 @@ public class Roi extends Piece
        					return true;
        				} else return false;
        			} else {
-       			    dejaDeplace=true
+       			    dejaDeplace=true;
        				return true;
        			}
        		}
-       		if (isRoquePossible(x,y,p)){
+       	/*	if (isRoquePossible(x,y,p)){
        		    plateau.roque(this,x,y);
        		    return true;
-            }
+            }*/
        		return false;
        	}
-
+/*
        	public boolean isRoquePossible(int x, int y, Piece[][] p){
             if (dejaDeplace) return false;
             if (j>getPosX()){
@@ -86,5 +86,5 @@ public class Roi extends Piece
                 }
             }
             return true;
-        }
+        }*/
 }

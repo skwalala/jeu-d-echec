@@ -7,6 +7,8 @@ class Plateau extends JFrame{
   public ControlButton controlButton;
   private JPanel pGrille;
   private JPanel pAffiche;
+  private ImageIcon[][] image;
+  private ImageIcon blankImage;
 
   public Plateau(){
     initPLateau();
@@ -20,6 +22,8 @@ class Plateau extends JFrame{
     pGrille = new JPanel(new GridLayout(8,8));
     controlButton = new ControlButton(this);
     pAffiche = new JPanel();
+    image=loadImages();
+    blankImage=createImageIcon("img/image_blank.gif","blank");
 
     this.plateau = new Piece[8][8];
     this.plateau[0][0] = new Tour(0,0,"blanc");
@@ -95,7 +99,7 @@ class Plateau extends JFrame{
 	}
 	return false;
   }
-
+/*
   public void roque(Piece roi, int x, int y){
     if (this.plateau[x][y]instanceof Tour) {
       this.remove(roi);
@@ -118,7 +122,7 @@ class Plateau extends JFrame{
       }
     }
   }
-
+*/
   public Piece[][] getPlateau(){
 	return this.plateau;
   }
@@ -131,11 +135,13 @@ class Plateau extends JFrame{
       for (int j = 0 ; j < 8 ; j++) {
         JPanel pBut = new JPanel();
 	  if (plateau[j][i]!=null) {
-          but = new Bouton((plateau[j][i]).getNom(),i,j);
-	}else{
-          but = new Bouton("-",i,j);
-	}
-        but.setPreferredSize(new Dimension(100,100));
+	        but = new Bouton((plateau[j][i]).getNom(),i,j);
+		but.setIcon(getIcon(plateau[j][i].getNom(),plateau[j][i].getCouleur()));
+	  }else{
+          	but = new Bouton("-",i,j);
+		but.setIcon(blankImage);
+	  }
+        but.setPreferredSize(new Dimension(80,100));
         but.addActionListener(controlButton);
         pBut.add(but);
         pGrille.add(pBut);
@@ -146,4 +152,57 @@ class Plateau extends JFrame{
     this.pAffiche.setBorder(BorderFactory.createEmptyBorder(30,30,30,30));
     setContentPane(this.pAffiche);
   }
+
+  private ImageIcon getIcon(String nom, String couleur){
+  	int cindex;
+	int tindex=0;
+	String[] type={"P","T","C","F","D","R"};
+	System.out.print(couleur);
+	if ("blanc".equals(couleur)){
+		cindex=0;
+		System.out.println(0);
+	}else{
+		cindex=1;
+		System.out.println(1);
+	}
+
+	while (!type[tindex].equals(nom)){
+		tindex++;
+	}
+	System.out.println("indexes:"+cindex+tindex);
+	return image[cindex][tindex];
+  }
+
+  private ImageIcon[][] loadImages(){
+        ImageIcon[][] tempListImageIcon = new ImageIcon[2][];
+        ImageIcon[] tempList2ImageIcon = new ImageIcon[6];
+	char[] color={'B','N'};
+	char[] type={'P','T','C','F','D','R'};
+        for(int j=0; j<color.length; j++) {
+        	for(int i=0; i<type.length; i++) {
+	            tempList2ImageIcon[i]=createImageIcon("img/" + type[i] + color[j] + ".png",""+type[i]+color[j]);
+		    System.out.println("img/" + type[i] + color[j] + ".png");
+		}
+		tempListImageIcon[j]=Arrays.copyOf(tempList2ImageIcon,tempList2ImageIcon.length);
+		System.out.println(j);
+        }
+        return tempListImageIcon;
+    }
+
+    /**
+     * @param path path to the image
+     * @param description description of the image (name)
+     * @return ImageIcon
+     */
+
+    private ImageIcon createImageIcon(String path, String description) {
+        java.net.URL imgURL = getClass().getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL, description);
+        } else {
+            System.err.println("Couldn't find file: " + path);
+            return null;
+        }
+    }
+
 }
