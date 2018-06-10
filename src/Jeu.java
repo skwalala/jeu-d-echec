@@ -99,7 +99,7 @@ public class Jeu extends Component {
         					p.affichePlateau();
 					        p.display();
 					}else{
-						dispErrorRocque();
+						dispErrorRoque();
 					}
 		      }else if (!pieces[xPiece][yPiece].seDeplace(pieces, newXPiece, newYPiece)) {
                        	System.out.println("Erreur : veuillez choisir un autre emplacement.");
