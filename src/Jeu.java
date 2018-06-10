@@ -46,12 +46,51 @@ public class Jeu extends Component {
         	      xPiece = pieceJoue[1];
 	              yPiece = pieceJoue[0];
                       System.out.println(pieces[xPiece][yPiece].getNom());
-        	      printAllDeplacement(pieces, xPiece, yPiece);
+        	      //printAllDeplacement(pieces, xPiece, yPiece);
 
 	              int[] deplacementJoue = getCoordonnéeDeplacement();
                       newXPiece = deplacementJoue[1];
         	      newYPiece = deplacementJoue[0];
-	              if (!pieces[xPiece][yPiece].seDeplace(pieces, newXPiece, newYPiece)) {
+
+		      //check roque
+		      if (pieces[xPiece][yPiece]!=null && pieces[newXPiece][newYPiece]!=null){
+		      	System.out.println("roque select detected");
+				if ((pieces[xPiece][yPiece].getNom().equals("R") && pieces[newXPiece][newYPiece].getNom().equals("T"))
+				|| (pieces[xPiece][yPiece].getNom().equals("T") && pieces[newXPiece][newYPiece].getNom().equals("R"))){
+					System.out.println("check piece");
+					if (roque(pieces, xPiece, yPiece, newXPiece, newYPiece)){
+						System.out.println("check roque");
+						Piece tempPiece = pieces[newXPiece][newYPiece];
+						pieces[newXPiece][newYPiece] = pieces[xPiece][yPiece];
+			                        pieces[xPiece][yPiece] = tempPiece;
+
+			                        pieces[newXPiece][newYPiece].setPosX(newXPiece);
+			                        pieces[newXPiece][newYPiece].setPosY(newYPiece);
+			                        pieces[xPiece][yPiece].setPosX(xPiece);
+			                        pieces[xPiece][yPiece].setPosY(xPiece);
+
+						if ((isEchec(pieces, camp))){
+			                                System.out.println("Roi est en echec, veuillez deplacer le roi.");
+							tempPiece = pieces[newXPiece][newYPiece];
+							pieces[newXPiece][newYPiece] = pieces[xPiece][yPiece];
+			                        	pieces[xPiece][yPiece] = tempPiece;
+			                                dispErrorEchec();
+			                        }else{
+                        			        changePion(pieces);
+			                                if (camp.equals("noir")) {
+                        			            camp = "blanc";
+			                                } else {
+                    				            camp = "noir";
+                                			}
+							pieces[newXPiece][newYPiece].setMoved();
+							pieces[xPiece][yPiece].setMoved();
+                        			}			
+			                        for(int k = 0; k < 4; k++){
+                        			    Jeu.coordonnees[k] = 9;
+			                        }
+					}
+				}
+		      }else if (!pieces[xPiece][yPiece].seDeplace(pieces, newXPiece, newYPiece)) {
                        	System.out.println("Erreur : veuillez choisir un autre emplacement.");
                         deplacementJoue = null;
 			dispErrorPosition();
@@ -64,6 +103,8 @@ public class Jeu extends Component {
 	             		System.out.println("Roi est en echec, veuillez deplacer le roi.");
 	                      	pieces[xPiece][yPiece] = pieces[newXPiece][newYPiece];
 	                	pieces[newXPiece][newYPiece] = null;
+			        pieces[xPiece][yPiece].setPosX(xPiece);
+			        pieces[xPiece][yPiece].setPosY(xPiece);
 				dispErrorEchec();
 			}else{
 		                changePion(pieces);
@@ -72,6 +113,7 @@ public class Jeu extends Component {
         		        } else {
 		                    camp = "noir";
                       		}
+				pieces[newXPiece][newYPiece].setMoved();
 			}
 			for(int k = 0; k < 4; k++){
 	        	    Jeu.coordonnees[k] = 9;
@@ -137,7 +179,7 @@ public class Jeu extends Component {
         return false;
     }
 
-    public boolean isCheckMat(Piece[][] p, String camp){
+    public static boolean isEcheckMat(Piece[][] p, String camp){
         int[] posRoi = getPosRoi(p, camp);
         if (isEchec(p, camp)){
             int[][] getAllDeplacementCouleur = new int[8][8]; // new int[8][8] remplacé par getAllDeplacementCouleur
@@ -151,6 +193,30 @@ public class Jeu extends Component {
             return true;
         }
         return false;
+    }
+
+    private static boolean roque(Piece[][] p, int x, int y, int nx, int ny){
+    	if (p[x][y].moved()==true || p[nx][ny].moved()==true){
+		System.out.println("already moved");
+		return false;
+	}
+	if (x<nx){
+		for (int i=x+1;i<x;i++){
+			if (p[i][y]!=null){
+				System.out.println("piece detected at : "+i); 
+				return false;
+			}
+		}
+		return true;
+	}else{
+		for (int i=nx+1;i<nx;i++){
+			if (p[i][y]!=null){
+				System.out.println("piece detected at : "+i); 
+				return false;
+			}
+		}
+		return true;
+	}
     }
 
     public static int[] getPosRoi(Piece[][] p, String camp) {

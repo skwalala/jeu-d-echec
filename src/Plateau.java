@@ -50,7 +50,7 @@ class Plateau extends JFrame{
       }
       if (i == 6 ) {
         for ( int j = 0 ; j < 8 ; j++ ) {
-          this.plateau[j][i] = new Pion(j,i,"noir");
+         this.plateau[j][i] = new Pion(j,i,"noir");
         }
       }
       if (i > 1 && i < 6) {

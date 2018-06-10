@@ -3,7 +3,6 @@ import java.util.*;
 public class Tour extends Piece
 {
 
-
         // Constructeur tour
 
         public Tour()
@@ -28,9 +27,6 @@ public class Tour extends Piece
             int b = y;
             int diffX = deplacementX - x;
             int diffY = deplacementY - y;
-	    System.out.println("x: "+x+" y: "+y);
-	    System.out.println("depX"+deplacementX+"depY"+deplacementY);
-	    System.out.println("diff : "+diffX+diffY);
 
 	    if (diffX!=0 && diffY!=0){
 	    	return false;

@@ -3,8 +3,6 @@ import java.lang.*;
 
 public class Roi extends Piece
 {
-        boolean dejaDeplace = false;
-
         // Constructeur tour
 
         public Roi()
@@ -58,11 +56,9 @@ public class Roi extends Piece
        		if (estValide(x,y,p)){
        			if (!(p[x][y]==null)) {
        				if (!(p[x][y].getCouleur().equals(super.getCouleur()))) {
-       				    dejaDeplace=true;
        					return true;
        				} else return false;
        			} else {
-       			    dejaDeplace=true;
        				return true;
        			}
        		}

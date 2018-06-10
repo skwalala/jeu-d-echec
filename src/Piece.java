@@ -5,6 +5,7 @@ abstract class Piece{
   private int y;
   private String couleur;
   private String nom;
+  private boolean dejaDeplace = false;
 
   public Piece(int x, int y, String couleur, String nom){
     this.x = x;
@@ -48,6 +49,14 @@ abstract class Piece{
   }
 
   public abstract boolean seDeplace(Piece[][] p, int x, int y);
+
+  public boolean moved(){
+  	return dejaDeplace;
+  }
+
+  public void setMoved(){
+	dejaDeplace=true;
+  }
 
   public int[][] getAllDeplacement(Piece[][] p){
 	int grille[][] =new int[8][8];
