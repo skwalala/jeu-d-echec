@@ -16,36 +16,7 @@ class ControlButton implements ActionListener{
       int j = but.getY();
       String nom = but.getNom();
 
-
-      if(Jeu.coordonnees[0] == 9 && Jeu.coordonnees[1] == 9){
-          Jeu.coordonnees[0] = i;
-          Jeu.coordonnees[1] = j;
-          for(int l = 0; l < 4; l++ ){
-              System.out.println(Jeu.coordonnees[l]);
-          }
-
-          System.out.println("i = " + i + " j = " + j + " nom = " +nom);
-      }else if(Jeu.coordonnees[2] == 9 && Jeu.coordonnees[3] == 9){
-          Jeu.coordonnees[2] = i;
-          Jeu.coordonnees[3] = j;
-          Jeu.verif();
-          Piece[][]piece = p.getPlateau();
-          if(piece[Jeu.getxPiece()][Jeu.getyPiece()] != null) {
-              System.out.println(piece[Jeu.getxPiece()][Jeu.getyPiece()].getNom());
-          }
-
-          for(int l = 0; l < 4; l++ ){
-              System.out.println(Jeu.coordonnees[l]);
-          }
-
-          System.out.println("i = " + i + " j = " + j + " nom = " +nom);
-
-          for(int k = 0; k < 4; k++){
-              Jeu.coordonnees[k] = 9;
-          }
-      }
-
-
+      Jeu.verif(i,j);
     }
 
 

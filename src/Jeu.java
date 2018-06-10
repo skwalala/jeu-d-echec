@@ -25,44 +25,61 @@ public class Jeu extends Component {
         return coordonneesDeplacement;
     }
 
-    public static void verif() {
+    public static void verif(int i, int j) {
         Piece[][] pieces = p.getPlateau();
-        int[] pieceJoue = getCoordonnéePiece();
-        if (pieces[pieceJoue[1]][pieceJoue[0]] != null) {
-            if (pieces[pieceJoue[1]][pieceJoue[0]].getCouleur().equals(camp)) {
-                if ((isEchec(pieces, camp)) && (!pieces[pieceJoue[1]][pieceJoue[0]].getNom().equals("R"))){
-                    System.out.println("Roi est en echec, veuillez deplacer le roi.");
-                }else{
-                    xPiece = pieceJoue[1];
-                    yPiece = pieceJoue[0];
-                    System.out.println(pieces[xPiece][yPiece].getNom());
-                    printAllDeplacement(pieces, xPiece, yPiece);
+    	if(Jeu.coordonnees[0] == 9 && Jeu.coordonnees[1] == 9){
+        	if (pieces[j][i] != null) {
+	            if (pieces[j][i].getCouleur().equals(camp)) {
+				Jeu.coordonnees[0] = i;
+	        		Jeu.coordonnees[1] = j;
+				
+			}else{
+				dispErrorSelection();
+			}
+		}else{
+			dispErrorSelection();
+		}
+	}else{
+		Jeu.coordonnees[2] = i;
+	        Jeu.coordonnees[3] = j;
+	        int[] pieceJoue = getCoordonnéePiece();
+        	      xPiece = pieceJoue[1];
+	              yPiece = pieceJoue[0];
+                      System.out.println(pieces[xPiece][yPiece].getNom());
+        	      printAllDeplacement(pieces, xPiece, yPiece);
 
-                    int[] deplacementJoue = getCoordonnéeDeplacement();
-                    newXPiece = deplacementJoue[1];
-                    newYPiece = deplacementJoue[0];
-                    if (!pieces[xPiece][yPiece].seDeplace(pieces, newXPiece, newYPiece)) {
-                        System.out.println("Erreur : veuillez choisir un autre emplacement.");
+	              int[] deplacementJoue = getCoordonnéeDeplacement();
+                      newXPiece = deplacementJoue[1];
+        	      newYPiece = deplacementJoue[0];
+	              if (!pieces[xPiece][yPiece].seDeplace(pieces, newXPiece, newYPiece)) {
+                       	System.out.println("Erreur : veuillez choisir un autre emplacement.");
                         deplacementJoue = null;
-                    } else {
-                        pieces[newXPiece][newYPiece] = pieces[xPiece][yPiece];
-                        pieces[xPiece][yPiece] = null;
+			dispErrorPosition();
+        	      } else {
+	                pieces[newXPiece][newYPiece] = pieces[xPiece][yPiece];
+                      	pieces[xPiece][yPiece] = null;
                         pieces[newXPiece][newYPiece].setPosX(newXPiece);
-                        pieces[newXPiece][newYPiece].setPosY(newYPiece);
-                        changePion(pieces);
-                        if (camp.equals("noir")) {
-                            camp = "blanc";
-                        } else {
-                            camp = "noir";
-                        }
-                    }
-                }
-            }else{
-                System.out.println("Erreur : veulliez choisir une autre piece.");
-            }
-        }
-        p.affichePlateau();
-        p.display();
+        	        pieces[newXPiece][newYPiece].setPosY(newYPiece);
+        	        if ((isEchec(pieces, camp))){
+	             		System.out.println("Roi est en echec, veuillez deplacer le roi.");
+	                      	pieces[xPiece][yPiece] = pieces[newXPiece][newYPiece];
+	                	pieces[newXPiece][newYPiece] = null;
+				dispErrorEchec();
+			}else{
+		                changePion(pieces);
+                      		if (camp.equals("noir")) {
+                	            camp = "blanc";
+        		        } else {
+		                    camp = "noir";
+                      		}
+			}
+			for(int k = 0; k < 4; k++){
+	        	    Jeu.coordonnees[k] = 9;
+	        	}
+		      }
+        	p.affichePlateau();
+	        p.display();
+	}
     }
 
     public static void changePion(Piece[][] pieces) {
@@ -196,6 +213,17 @@ public class Jeu extends Component {
         return n;
     }
 
+    private static void dispErrorSelection(){
+	JOptionPane.showMessageDialog(p, "erreur veuillez choisir une piece de votre couleur");
+    }
+
+    private static void dispErrorPosition(){
+	JOptionPane.showMessageDialog(p, "veuillez choisir un emplacement correct");
+    }
+
+    private static void dispErrorEchec(){
+	JOptionPane.showMessageDialog(p, "attention le roi est en echec");
+    }
 
     public static void main(String[] args) {
         p = new Plateau();
