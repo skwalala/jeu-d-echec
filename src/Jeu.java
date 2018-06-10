@@ -35,7 +35,7 @@ public class Jeu extends Component {
 				Jeu.coordonnees[0] = i;
 	        		Jeu.coordonnees[1] = j;
 				but.setBorder(BorderFactory.createLineBorder(Color.red, 5));
-        	      		printAllDeplacement(pieces, xPiece, yPiece);
+        	      		printAllDeplacement(pieces, j, i);
 			}else{
 				dispErrorSelection();
 			}
@@ -62,8 +62,8 @@ public class Jeu extends Component {
 
 		      //check roque
 		      if (pieces[xPiece][yPiece]!=null && pieces[newXPiece][newYPiece]!=null
-			&& (pieces[xPiece][yPiece].getNom().equals("R") && pieces[newXPiece][newYPiece].getNom().equals("T"))
-			|| ("T".equals(pieces[xPiece][yPiece].getNom()) && pieces[newXPiece][newYPiece].getNom().equals("R"))){
+			&& ((pieces[xPiece][yPiece].getNom().equals("R") && pieces[newXPiece][newYPiece].getNom().equals("T"))
+			|| ("T".equals(pieces[xPiece][yPiece].getNom()) && "R".equals(pieces[newXPiece][newYPiece].getNom())))){
 		      			System.out.println("roque select detected");
 					System.out.println("check piece");
 					if (roque(pieces, xPiece, yPiece, newXPiece, newYPiece)){
@@ -203,7 +203,6 @@ public class Jeu extends Component {
 		for (int j=0; j<p[i].length;j++){
 			if (p[i][j]!=null && !p[i][j].getCouleur().equals(camp)){
 				dep = p[i][j].getAllDeplacement(p);
-        	      		printAllDeplacement(p, i, j);
 				for (int x=0; x<dep.length; x++){
 					for (int y=0; y<dep[x].length;y++){
 						if (dep[x][y]==1){
@@ -261,6 +260,7 @@ public class Jeu extends Component {
     }
 
     public static void printAllDeplacement(Piece[][] piece, int x, int y) {
+	System.out.println(""+x+"+"+y);
         if (piece[x][y] != null) {
             int[][] deplacement = piece[x][y].getAllDeplacement(piece);
             for (int i = 0; i < 8; i++) {
