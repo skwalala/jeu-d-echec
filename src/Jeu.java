@@ -29,13 +29,12 @@ public class Jeu extends Component {
 
     public static void verif(int i, int j) {
         Piece[][] pieces = p.getPlateau();
-    	isEchecEtMat(pieces,camp);
     	if(Jeu.coordonnees[0] == 9 && Jeu.coordonnees[1] == 9){
         	if (pieces[j][i] != null) {
 	            if (pieces[j][i].getCouleur().equals(camp)) {
 				Jeu.coordonnees[0] = i;
 	        		Jeu.coordonnees[1] = j;
-				
+        	      		printAllDeplacement(pieces, xPiece, yPiece);
 			}else{
 				dispErrorSelection();
 			}
@@ -48,8 +47,6 @@ public class Jeu extends Component {
 	        int[] pieceJoue = getCoordonnéePiece();
         	      xPiece = pieceJoue[1];
 	              yPiece = pieceJoue[0];
-                      System.out.println(pieces[xPiece][yPiece].getNom());
-        	      //printAllDeplacement(pieces, xPiece, yPiece);
 
 	              int[] deplacementJoue = getCoordonnéeDeplacement();
                       newXPiece = deplacementJoue[1];
@@ -123,6 +120,9 @@ public class Jeu extends Component {
 		      }
         	p.affichePlateau();
 	        p.display();
+    		if (isEchecEtMat(pieces,camp)){
+			dispEchecEtMat();
+		}
 	}
     }
 
@@ -184,18 +184,34 @@ public class Jeu extends Component {
     public static boolean isEchecEtMat(Piece[][] p, String camp){
     	//dispEchecEtMat();
         int[] posRoi = getPosRoi(p, camp);
-        if (isEchec(p, camp)){
-            int[][] getAllDeplacementCouleur = new int[8][8]; // new int[8][8] remplacé par getAllDeplacementCouleur
-            for (int i=posRoi[0]-1; i<posRoi[0]+1; i++){
-                for (int j=posRoi[1]-1; j<posRoi[1]+1;){
-                    if (getAllDeplacementCouleur[i][j] == 0){
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
+	int[][] dep;
+	
+	Piece[][] tempPlateau = new Piece[8][];
+	Piece tempPiece;
+
+	for (int i=0; i<p.length; i++){
+		for (int j=0; j<p[i].length;j++){
+			if (p[i][j]!=null && !p[i][j].getCouleur().equals(camp)){
+				dep = p[i][j].getAllDeplacement(p);
+				for (int x=0; x<dep.length; x++){
+					for (int y=0; y<dep[x].length;y++){
+						if (dep[x][y]==1){
+							for (int z=0; z<8; z++){
+								tempPlateau[z] = Arrays.copyOf(p[z],p[z].length);
+							}
+							tempPiece = tempPlateau[i][j];
+                                                	tempPlateau[i][j] = tempPlateau[x][y];
+                                                	tempPlateau[x][y] = tempPiece;
+							if (!isEchec(tempPlateau, camp)){
+								return false;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+        return true;
     }
 
     private static boolean roque(Piece[][] p, int x, int y, int nx, int ny){
@@ -243,7 +259,6 @@ public class Jeu extends Component {
                 }
                 System.out.println("");
             }
-            System.out.println(piece[x][y].getNom());
         }
 
     }
