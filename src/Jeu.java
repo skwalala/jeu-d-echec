@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
+import java.awt.event.WindowEvent;
+
 public class Jeu extends Component {
     static final Scanner input = new Scanner(System.in);
     public static int[] coordonnees;
@@ -27,6 +29,7 @@ public class Jeu extends Component {
 
     public static void verif(int i, int j) {
         Piece[][] pieces = p.getPlateau();
+    	isEchecEtMat(pieces,camp);
     	if(Jeu.coordonnees[0] == 9 && Jeu.coordonnees[1] == 9){
         	if (pieces[j][i] != null) {
 	            if (pieces[j][i].getCouleur().equals(camp)) {
@@ -53,10 +56,10 @@ public class Jeu extends Component {
         	      newYPiece = deplacementJoue[0];
 
 		      //check roque
-		      if (pieces[xPiece][yPiece]!=null && pieces[newXPiece][newYPiece]!=null){
-		      	System.out.println("roque select detected");
-				if ((pieces[xPiece][yPiece].getNom().equals("R") && pieces[newXPiece][newYPiece].getNom().equals("T"))
-				|| (pieces[xPiece][yPiece].getNom().equals("T") && pieces[newXPiece][newYPiece].getNom().equals("R"))){
+		      if (pieces[xPiece][yPiece]!=null && pieces[newXPiece][newYPiece]!=null
+			&& (pieces[xPiece][yPiece].getNom().equals("R") && pieces[newXPiece][newYPiece].getNom().equals("T"))
+			|| (pieces[xPiece][yPiece].getNom().equals("T") && pieces[newXPiece][newYPiece].getNom().equals("R"))){
+		      			System.out.println("roque select detected");
 					System.out.println("check piece");
 					if (roque(pieces, xPiece, yPiece, newXPiece, newYPiece)){
 						System.out.println("check roque");
@@ -89,7 +92,6 @@ public class Jeu extends Component {
                         			    Jeu.coordonnees[k] = 9;
 			                        }
 					}
-				}
 		      }else if (!pieces[xPiece][yPiece].seDeplace(pieces, newXPiece, newYPiece)) {
                        	System.out.println("Erreur : veuillez choisir un autre emplacement.");
                         deplacementJoue = null;
@@ -179,7 +181,8 @@ public class Jeu extends Component {
         return false;
     }
 
-    public static boolean isEcheckMat(Piece[][] p, String camp){
+    public static boolean isEchecEtMat(Piece[][] p, String camp){
+    	//dispEchecEtMat();
         int[] posRoi = getPosRoi(p, camp);
         if (isEchec(p, camp)){
             int[][] getAllDeplacementCouleur = new int[8][8]; // new int[8][8] remplacé par getAllDeplacementCouleur
@@ -277,6 +280,11 @@ public class Jeu extends Component {
                 options[3]);
 
         return n;
+    }
+
+    private static void dispEchecEtMat(){
+	JOptionPane.showMessageDialog(p, "echec et mat. "+camp+" a perdu");
+	p.dispatchEvent(new WindowEvent(p, WindowEvent.WINDOW_CLOSING));
     }
 
     private static void dispErrorSelection(){
