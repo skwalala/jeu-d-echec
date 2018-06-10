@@ -27,20 +27,28 @@ public class Jeu extends Component {
         return coordonneesDeplacement;
     }
 
-    public static void verif(int i, int j) {
+    public static void verif(int i, int j, JButton but) {
         Piece[][] pieces = p.getPlateau();
     	if(Jeu.coordonnees[0] == 9 && Jeu.coordonnees[1] == 9){
         	if (pieces[j][i] != null) {
 	            if (pieces[j][i].getCouleur().equals(camp)) {
 				Jeu.coordonnees[0] = i;
 	        		Jeu.coordonnees[1] = j;
-        	      		printAllDeplacement(pieces, xPiece, yPiece);
+				but.setBorder(BorderFactory.createLineBorder(Color.red, 5));
+        	      		printAllDeplacement(pieces, j, i);
 			}else{
 				dispErrorSelection();
 			}
 		}else{
 			dispErrorSelection();
 		}
+	
+	}else if(coordonnees[0]==i && coordonnees[1]==j){
+		for(int k = 0; k < 4; k++){
+                	Jeu.coordonnees[k] = 9;
+		}
+        	p.affichePlateau();
+	        p.display();
 	}else{
 		Jeu.coordonnees[2] = i;
 	        Jeu.coordonnees[3] = j;
@@ -54,8 +62,8 @@ public class Jeu extends Component {
 
 		      //check roque
 		      if (pieces[xPiece][yPiece]!=null && pieces[newXPiece][newYPiece]!=null
-			&& (pieces[xPiece][yPiece].getNom().equals("R") && pieces[newXPiece][newYPiece].getNom().equals("T"))
-			|| (pieces[xPiece][yPiece].getNom().equals("T") && pieces[newXPiece][newYPiece].getNom().equals("R"))){
+			&& ((pieces[xPiece][yPiece].getNom().equals("R") && pieces[newXPiece][newYPiece].getNom().equals("T"))
+			|| ("T".equals(pieces[xPiece][yPiece].getNom()) && "R".equals(pieces[newXPiece][newYPiece].getNom())))){
 		      			System.out.println("roque select detected");
 					System.out.println("check piece");
 					if (roque(pieces, xPiece, yPiece, newXPiece, newYPiece)){
@@ -88,6 +96,8 @@ public class Jeu extends Component {
 			                        for(int k = 0; k < 4; k++){
                         			    Jeu.coordonnees[k] = 9;
 			                        }
+        					p.affichePlateau();
+					        p.display();
 					}
 		      }else if (!pieces[xPiece][yPiece].seDeplace(pieces, newXPiece, newYPiece)) {
                        	System.out.println("Erreur : veuillez choisir un autre emplacement.");
@@ -117,9 +127,9 @@ public class Jeu extends Component {
 			for(int k = 0; k < 4; k++){
 	        	    Jeu.coordonnees[k] = 9;
 	        	}
+        		p.affichePlateau();
+		        p.display();
 		      }
-        	p.affichePlateau();
-	        p.display();
     		if (isEchecEtMat(pieces,camp)){
 			dispEchecEtMat();
 		}
@@ -250,6 +260,7 @@ public class Jeu extends Component {
     }
 
     public static void printAllDeplacement(Piece[][] piece, int x, int y) {
+	System.out.println(""+x+"+"+y);
         if (piece[x][y] != null) {
             int[][] deplacement = piece[x][y].getAllDeplacement(piece);
             for (int i = 0; i < 8; i++) {

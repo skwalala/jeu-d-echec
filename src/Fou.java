@@ -19,7 +19,7 @@ class Fou extends Piece{
 	public boolean seDeplace(Piece[][] p, int x, int y) {
 		if (checkDeplace(x,y,p)){
 			if (!(p[x][y]==null)) {
-				if (!(p[x][y].getCouleur()==super.getCouleur())) {
+				if (!(p[x][y].getCouleur().equals(super.getCouleur()))) {
 					return true;
 				} else return false;
 			} else {
@@ -43,7 +43,7 @@ class Fou extends Piece{
 
 		if (diffX==diffY) {
 			if( newX<initX && newY<initY ) {
-				for (int a=initX-1 ; a>newX-1 ; a--){
+				for (int a=initX-1 ; a>newX+1 ; a--){
 					b--;
 					if (!(p[a][b]==null)){
 						return false;
@@ -57,7 +57,7 @@ class Fou extends Piece{
 					}
 				}
 			} else if ( newX<initX && newY>initY ) {
-				for (int a=initX-1 ; a>newX-1 ; a--){
+				for (int a=initX-1 ; a>newX+1 ; a--){
 					b++;
 					if (!(p[a][b]==null)){
 						return false;

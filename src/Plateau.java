@@ -5,7 +5,7 @@ import javax.swing.*;
 class Plateau extends JFrame{
   private Piece plateau[][];
   public ControlButton controlButton;
-  private JPanel pGrille;
+  protected JPanel pGrille;
   private JPanel pAffiche;
   private ImageIcon[][] image;
   private ImageIcon blankImage;
