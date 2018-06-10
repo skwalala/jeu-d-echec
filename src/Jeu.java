@@ -72,10 +72,6 @@ public class Jeu extends Component {
 						pieces[newXPiece][newYPiece] = pieces[xPiece][yPiece];
 			                        pieces[xPiece][yPiece] = tempPiece;
 
-			                        pieces[newXPiece][newYPiece].setPosX(newXPiece);
-			                        pieces[newXPiece][newYPiece].setPosY(newYPiece);
-			                        pieces[xPiece][yPiece].setPosX(xPiece);
-			                        pieces[xPiece][yPiece].setPosY(xPiece);
 
 						if ((isEchec(pieces, camp))){
 			                                System.out.println("Roi est en echec, veuillez deplacer le roi.");
@@ -84,6 +80,10 @@ public class Jeu extends Component {
 			                        	pieces[xPiece][yPiece] = tempPiece;
 			                                dispErrorEchec();
 			                        }else{
+			                        	pieces[newXPiece][newYPiece].setPosX(newXPiece);
+				                        pieces[newXPiece][newYPiece].setPosY(newYPiece);
+				                        pieces[xPiece][yPiece].setPosX(xPiece);
+				                        pieces[xPiece][yPiece].setPosY(xPiece);
                         			        changePion(pieces);
 			                                if (camp.equals("noir")) {
                         			            camp = "blanc";
@@ -106,16 +106,14 @@ public class Jeu extends Component {
         	      } else {
 	                pieces[newXPiece][newYPiece] = pieces[xPiece][yPiece];
                       	pieces[xPiece][yPiece] = null;
-                        pieces[newXPiece][newYPiece].setPosX(newXPiece);
-        	        pieces[newXPiece][newYPiece].setPosY(newYPiece);
         	        if ((isEchec(pieces, camp))){
 	             		System.out.println("Roi est en echec, veuillez deplacer le roi.");
 	                      	pieces[xPiece][yPiece] = pieces[newXPiece][newYPiece];
 	                	pieces[newXPiece][newYPiece] = null;
-			        pieces[xPiece][yPiece].setPosX(xPiece);
-			        pieces[xPiece][yPiece].setPosY(xPiece);
 				dispErrorEchec();
 			}else{
+                        	pieces[newXPiece][newYPiece].setPosX(newXPiece);
+	        	        pieces[newXPiece][newYPiece].setPosY(newYPiece);
 		                changePion(pieces);
                       		if (camp.equals("noir")) {
                 	            camp = "blanc";
@@ -192,7 +190,6 @@ public class Jeu extends Component {
     }
 
     public static boolean isEchecEtMat(Piece[][] p, String camp){
-    	//dispEchecEtMat();
         int[] posRoi = getPosRoi(p, camp);
 	int[][] dep;
 	
@@ -201,8 +198,9 @@ public class Jeu extends Component {
 
 	for (int i=0; i<p.length; i++){
 		for (int j=0; j<p[i].length;j++){
-			if (p[i][j]!=null && !p[i][j].getCouleur().equals(camp)){
+			if (p[i][j]!=null && p[i][j].getCouleur().equals(camp)){
 				dep = p[i][j].getAllDeplacement(p);
+        	      		printAllDeplacement(p, i, j);
 				for (int x=0; x<dep.length; x++){
 					for (int y=0; y<dep[x].length;y++){
 						if (dep[x][y]==1){
