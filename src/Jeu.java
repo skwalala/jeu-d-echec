@@ -27,13 +27,14 @@ public class Jeu extends Component {
         return coordonneesDeplacement;
     }
 
-    public static void verif(int i, int j) {
+    public static void verif(int i, int j, JButton but) {
         Piece[][] pieces = p.getPlateau();
     	if(Jeu.coordonnees[0] == 9 && Jeu.coordonnees[1] == 9){
         	if (pieces[j][i] != null) {
 	            if (pieces[j][i].getCouleur().equals(camp)) {
 				Jeu.coordonnees[0] = i;
 	        		Jeu.coordonnees[1] = j;
+				but.setBorder(BorderFactory.createLineBorder(Color.red, 5));
         	      		printAllDeplacement(pieces, xPiece, yPiece);
 			}else{
 				dispErrorSelection();
@@ -41,6 +42,13 @@ public class Jeu extends Component {
 		}else{
 			dispErrorSelection();
 		}
+	
+	}else if(coordonnees[0]==i && coordonnees[1]==j){
+		for(int k = 0; k < 4; k++){
+                	Jeu.coordonnees[k] = 9;
+		}
+        	p.affichePlateau();
+	        p.display();
 	}else{
 		Jeu.coordonnees[2] = i;
 	        Jeu.coordonnees[3] = j;
@@ -55,7 +63,7 @@ public class Jeu extends Component {
 		      //check roque
 		      if (pieces[xPiece][yPiece]!=null && pieces[newXPiece][newYPiece]!=null
 			&& (pieces[xPiece][yPiece].getNom().equals("R") && pieces[newXPiece][newYPiece].getNom().equals("T"))
-			|| (pieces[xPiece][yPiece].getNom().equals("T") && pieces[newXPiece][newYPiece].getNom().equals("R"))){
+			|| ("T".equals(pieces[xPiece][yPiece].getNom()) && pieces[newXPiece][newYPiece].getNom().equals("R"))){
 		      			System.out.println("roque select detected");
 					System.out.println("check piece");
 					if (roque(pieces, xPiece, yPiece, newXPiece, newYPiece)){
@@ -88,6 +96,8 @@ public class Jeu extends Component {
 			                        for(int k = 0; k < 4; k++){
                         			    Jeu.coordonnees[k] = 9;
 			                        }
+        					p.affichePlateau();
+					        p.display();
 					}
 		      }else if (!pieces[xPiece][yPiece].seDeplace(pieces, newXPiece, newYPiece)) {
                        	System.out.println("Erreur : veuillez choisir un autre emplacement.");
@@ -117,9 +127,9 @@ public class Jeu extends Component {
 			for(int k = 0; k < 4; k++){
 	        	    Jeu.coordonnees[k] = 9;
 	        	}
+        		p.affichePlateau();
+		        p.display();
 		      }
-        	p.affichePlateau();
-	        p.display();
     		if (isEchecEtMat(pieces,camp)){
 			dispEchecEtMat();
 		}
@@ -193,6 +203,7 @@ public class Jeu extends Component {
 		for (int j=0; j<p[i].length;j++){
 			if (p[i][j]!=null && !p[i][j].getCouleur().equals(camp)){
 				dep = p[i][j].getAllDeplacement(p);
+        	      		printAllDeplacement(p, i, j);
 				for (int x=0; x<dep.length; x++){
 					for (int y=0; y<dep[x].length;y++){
 						if (dep[x][y]==1){

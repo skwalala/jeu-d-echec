@@ -16,7 +16,7 @@ class ControlButton implements ActionListener{
       int j = but.getY();
       String nom = but.getNom();
 
-      Jeu.verif(i,j);
+      Jeu.verif(i,j, but);
     }
 
 
