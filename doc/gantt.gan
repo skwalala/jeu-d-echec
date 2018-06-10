@@ -37,7 +37,7 @@
         <task id="5" name="recheche sur le jeu" color="#8cb6ce" meeting="false" start="2018-03-12" duration="6" complete="0" thirdDate="2018-03-12" thirdDate-constraint="0" expand="true"/>
         <task id="0" name="répartition des tâches" color="#8cb6ce" meeting="false" start="2018-03-20" duration="1" complete="0" thirdDate="2018-03-13" thirdDate-constraint="0" expand="true"/>
         <task id="6" name="mise en place des outils de gestion de projet" color="#8cb6ce" meeting="false" start="2018-03-20" duration="6" complete="0" thirdDate="2018-03-20" thirdDate-constraint="0" expand="true"/>
-        <task id="12" name="création de plateau" color="#8cb6ce" meeting="false" start="2018-03-26" duration="6" complete="0" thirdDate="2018-03-26" thirdDate-constraint="0" expand="true"/>
+        <task id="12" name="création de plateau" color="#8cb6ce" meeting="false" start="2018-03-26" duration="10" complete="0" thirdDate="2018-03-26" thirdDate-constraint="0" expand="true"/>
         <task id="14" name="créationd pièce" color="#8cb6ce" meeting="false" start="2018-03-26" duration="6" complete="0" thirdDate="2018-03-26" thirdDate-constraint="0" expand="true"/>
         <task id="51" name="rédaction du rapport" color="#8cb6ce" meeting="false" start="2018-03-28" duration="2" complete="0" thirdDate="2018-03-28" thirdDate-constraint="0" expand="true"/>
         <task id="15" name="création pion" color="#8cb6ce" meeting="false" start="2018-04-03" duration="14" complete="0" thirdDate="2018-04-03" thirdDate-constraint="0" expand="true"/>
