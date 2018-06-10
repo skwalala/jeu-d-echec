@@ -83,7 +83,7 @@ public class Jeu extends Component {
 			                        	pieces[newXPiece][newYPiece].setPosX(newXPiece);
 				                        pieces[newXPiece][newYPiece].setPosY(newYPiece);
 				                        pieces[xPiece][yPiece].setPosX(xPiece);
-				                        pieces[xPiece][yPiece].setPosY(xPiece);
+				                        pieces[xPiece][yPiece].setPosY(yPiece);
                         			        changePion(pieces);
 			                                if (camp.equals("noir")) {
                         			            camp = "blanc";
@@ -229,8 +229,9 @@ public class Jeu extends Component {
 		System.out.println("already moved");
 		return false;
 	}
-	if (x<nx){
-		for (int i=x+1;i<x;i++){
+	if (x>nx){
+		for (int i=nx+1;i<x;i++){
+			System.out.println(i);
 			if (p[i][y]!=null){
 				System.out.println("piece detected at : "+i); 
 				return false;
@@ -238,7 +239,8 @@ public class Jeu extends Component {
 		}
 		return true;
 	}else{
-		for (int i=nx+1;i<nx;i++){
+		for (int i=x+1;i<nx;i++){
+			System.out.println(i);
 			if (p[i][y]!=null){
 				System.out.println("piece detected at : "+i); 
 				return false;
