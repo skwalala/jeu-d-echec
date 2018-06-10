@@ -53,7 +53,6 @@ public class Tour extends Piece
 	    if (diffY>0 && diffX==0){
 	    	for (int i=y+1; i<deplacementY; i++){
 			if (p[x][i]!=null){
-	    			System.out.println(p[x][i].getNom());
 				return false;
 			}
 		}
