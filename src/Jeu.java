@@ -98,6 +98,8 @@ public class Jeu extends Component {
 			                        }
         					p.affichePlateau();
 					        p.display();
+					}else{
+						dispErrorRocque();
 					}
 		      }else if (!pieces[xPiece][yPiece].seDeplace(pieces, newXPiece, newYPiece)) {
                        	System.out.println("Erreur : veuillez choisir un autre emplacement.");
@@ -304,6 +306,10 @@ public class Jeu extends Component {
                 options[3]);
 
         return n;
+    }
+
+    private static void dispErrorRoque(){
+	JOptionPane.showMessageDialog(p, "erreur impossible de faire un roque");
     }
 
     private static void dispEchecEtMat(){
